@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Test\Intent;
+namespace Rboschin\AmazonAlexa\Test\Intent;
 
-use MaxBeckers\AmazonAlexa\Intent\IntentValue;
-use MaxBeckers\AmazonAlexa\Intent\Slot;
+use Rboschin\AmazonAlexa\Intent\IntentValue;
+use Rboschin\AmazonAlexa\Intent\Slot;
 use PHPUnit\Framework\TestCase;
 
 class SlotTest extends TestCase

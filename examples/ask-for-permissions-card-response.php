@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-use MaxBeckers\AmazonAlexa\Helper\ResponseHelper;
-use MaxBeckers\AmazonAlexa\Request\Request;
-use MaxBeckers\AmazonAlexa\RequestHandler\Basic\HelpRequestHandler;
-use MaxBeckers\AmazonAlexa\RequestHandler\RequestHandlerRegistry;
-use MaxBeckers\AmazonAlexa\Validation\RequestValidator;
+use Rboschin\AmazonAlexa\Helper\ResponseHelper;
+use Rboschin\AmazonAlexa\Request\Request;
+use Rboschin\AmazonAlexa\RequestHandler\Basic\HelpRequestHandler;
+use Rboschin\AmazonAlexa\RequestHandler\RequestHandlerRegistry;
+use Rboschin\AmazonAlexa\Validation\RequestValidator;
 
 require '../vendor/autoload.php';
 require 'Handlers/AskForPermissionsConsentCardResponseRequestHandler.php';

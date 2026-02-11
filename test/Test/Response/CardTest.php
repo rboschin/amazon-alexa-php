@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Test\Response;
+namespace Rboschin\AmazonAlexa\Test\Response;
 
 use ArrayObject;
-use MaxBeckers\AmazonAlexa\Exception\InvalidCardPermissionsException;
-use MaxBeckers\AmazonAlexa\Response\Card;
-use MaxBeckers\AmazonAlexa\Response\CardImage;
+use Rboschin\AmazonAlexa\Exception\InvalidCardPermissionsException;
+use Rboschin\AmazonAlexa\Response\Card;
+use Rboschin\AmazonAlexa\Response\CardImage;
 use PHPUnit\Framework\TestCase;
 
 class CardTest extends TestCase

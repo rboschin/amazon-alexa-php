@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Test\Response\Directives\APL;
+namespace Rboschin\AmazonAlexa\Test\Response\Directives\APL;
 
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\UpdateIndexListDataDirective;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\UpdateIndexListDataOperationType;
+use Rboschin\AmazonAlexa\Response\Directives\APL\UpdateIndexListDataDirective;
+use Rboschin\AmazonAlexa\Response\Directives\APL\UpdateIndexListDataOperationType;
 use PHPUnit\Framework\TestCase;
 
 class UpdateIndexListDataDirectiveTest extends TestCase

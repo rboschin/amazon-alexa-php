@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\RequestHandler\Basic;
+namespace Rboschin\AmazonAlexa\RequestHandler\Basic;
 
-use MaxBeckers\AmazonAlexa\Helper\ResponseHelper;
-use MaxBeckers\AmazonAlexa\Request\Request;
-use MaxBeckers\AmazonAlexa\Request\Request\Standard\IntentRequest;
-use MaxBeckers\AmazonAlexa\RequestHandler\AbstractRequestHandler;
-use MaxBeckers\AmazonAlexa\Response\Response;
+use Rboschin\AmazonAlexa\Helper\ResponseHelper;
+use Rboschin\AmazonAlexa\Request\Request;
+use Rboschin\AmazonAlexa\Request\Request\Standard\IntentRequest;
+use Rboschin\AmazonAlexa\RequestHandler\AbstractRequestHandler;
+use Rboschin\AmazonAlexa\Response\Response;
 
 class CancelRequestHandler extends AbstractRequestHandler
 {

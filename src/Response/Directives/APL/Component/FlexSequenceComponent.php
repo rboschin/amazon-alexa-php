@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Response\Directives\APL\Component;
+namespace Rboschin\AmazonAlexa\Response\Directives\APL\Component;
 
-use MaxBeckers\AmazonAlexa\Request\ScrollDirection;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Component\Traits\ActionableComponentTrait;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Component\Traits\MultiChildComponentTrait;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Document\APLComponentType;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Document\FlexAlignItems;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Document\Snap;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\StandardCommand\AbstractStandardCommand;
+use Rboschin\AmazonAlexa\Request\ScrollDirection;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Component\Traits\ActionableComponentTrait;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Component\Traits\MultiChildComponentTrait;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Document\APLComponentType;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Document\FlexAlignItems;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Document\Snap;
+use Rboschin\AmazonAlexa\Response\Directives\APL\StandardCommand\AbstractStandardCommand;
 
 class FlexSequenceComponent extends APLBaseComponent implements \JsonSerializable
 {

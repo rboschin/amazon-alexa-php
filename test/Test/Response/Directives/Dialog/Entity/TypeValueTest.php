@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Test\Response\Directives\Dialog\Entity;
+namespace Rboschin\AmazonAlexa\Test\Response\Directives\Dialog\Entity;
 
-use MaxBeckers\AmazonAlexa\Response\Directives\Dialog\Entity\TypeValue;
+use Rboschin\AmazonAlexa\Response\Directives\Dialog\Entity\TypeValue;
 use PHPUnit\Framework\TestCase;
 
 class TypeValueTest extends TestCase

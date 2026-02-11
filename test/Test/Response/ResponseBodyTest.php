@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Test\Response;
+namespace Rboschin\AmazonAlexa\Test\Response;
 
 use ArrayObject;
-use MaxBeckers\AmazonAlexa\Response\Card;
-use MaxBeckers\AmazonAlexa\Response\Directives\Display\RenderTemplateDirective;
-use MaxBeckers\AmazonAlexa\Response\OutputSpeech;
-use MaxBeckers\AmazonAlexa\Response\Reprompt;
-use MaxBeckers\AmazonAlexa\Response\ResponseBody;
+use Rboschin\AmazonAlexa\Response\Card;
+use Rboschin\AmazonAlexa\Response\Directives\Display\RenderTemplateDirective;
+use Rboschin\AmazonAlexa\Response\OutputSpeech;
+use Rboschin\AmazonAlexa\Response\Reprompt;
+use Rboschin\AmazonAlexa\Response\ResponseBody;
 use PHPUnit\Framework\TestCase;
 
 class ResponseBodyTest extends TestCase

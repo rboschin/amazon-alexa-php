@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Request\Request\System;
+namespace Rboschin\AmazonAlexa\Request\Request\System;
 
-use MaxBeckers\AmazonAlexa\Request\Request\AbstractRequest;
+use Rboschin\AmazonAlexa\Request\Request\AbstractRequest;
 
 abstract class SystemRequest extends AbstractRequest
 {

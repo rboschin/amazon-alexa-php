@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Helper;
+namespace Rboschin\AmazonAlexa\Helper;
 
 /**
  * This trait is helpful for the property to ArrayObject mapping.

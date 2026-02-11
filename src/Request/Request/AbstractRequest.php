@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Request\Request;
+namespace Rboschin\AmazonAlexa\Request\Request;
 
 abstract class AbstractRequest
 {

@@ -2,23 +2,23 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Test\Response\Directives;
+namespace Rboschin\AmazonAlexa\Test\Response\Directives;
 
-use MaxBeckers\AmazonAlexa\Response\Directives\AudioPlayer\AudioItem;
-use MaxBeckers\AmazonAlexa\Response\Directives\AudioPlayer\ClearDirective;
-use MaxBeckers\AmazonAlexa\Response\Directives\AudioPlayer\CurrentPlaybackState;
-use MaxBeckers\AmazonAlexa\Response\Directives\AudioPlayer\Metadata;
-use MaxBeckers\AmazonAlexa\Response\Directives\AudioPlayer\PlaybackFailed;
-use MaxBeckers\AmazonAlexa\Response\Directives\AudioPlayer\PlaybackFinished;
-use MaxBeckers\AmazonAlexa\Response\Directives\AudioPlayer\PlaybackNearlyFinished;
-use MaxBeckers\AmazonAlexa\Response\Directives\AudioPlayer\PlaybackStarted;
-use MaxBeckers\AmazonAlexa\Response\Directives\AudioPlayer\PlaybackStopped;
-use MaxBeckers\AmazonAlexa\Response\Directives\AudioPlayer\PlayDirective;
-use MaxBeckers\AmazonAlexa\Response\Directives\AudioPlayer\StopDirective;
-use MaxBeckers\AmazonAlexa\Response\Directives\AudioPlayer\Stream;
-use MaxBeckers\AmazonAlexa\Response\Directives\Display\Image;
-use MaxBeckers\AmazonAlexa\Response\Directives\Display\ImageSource;
-use MaxBeckers\AmazonAlexa\Response\Directives\System\Error;
+use Rboschin\AmazonAlexa\Response\Directives\AudioPlayer\AudioItem;
+use Rboschin\AmazonAlexa\Response\Directives\AudioPlayer\ClearDirective;
+use Rboschin\AmazonAlexa\Response\Directives\AudioPlayer\CurrentPlaybackState;
+use Rboschin\AmazonAlexa\Response\Directives\AudioPlayer\Metadata;
+use Rboschin\AmazonAlexa\Response\Directives\AudioPlayer\PlaybackFailed;
+use Rboschin\AmazonAlexa\Response\Directives\AudioPlayer\PlaybackFinished;
+use Rboschin\AmazonAlexa\Response\Directives\AudioPlayer\PlaybackNearlyFinished;
+use Rboschin\AmazonAlexa\Response\Directives\AudioPlayer\PlaybackStarted;
+use Rboschin\AmazonAlexa\Response\Directives\AudioPlayer\PlaybackStopped;
+use Rboschin\AmazonAlexa\Response\Directives\AudioPlayer\PlayDirective;
+use Rboschin\AmazonAlexa\Response\Directives\AudioPlayer\StopDirective;
+use Rboschin\AmazonAlexa\Response\Directives\AudioPlayer\Stream;
+use Rboschin\AmazonAlexa\Response\Directives\Display\Image;
+use Rboschin\AmazonAlexa\Response\Directives\Display\ImageSource;
+use Rboschin\AmazonAlexa\Response\Directives\System\Error;
 use PHPUnit\Framework\TestCase;
 
 class AudioTest extends TestCase

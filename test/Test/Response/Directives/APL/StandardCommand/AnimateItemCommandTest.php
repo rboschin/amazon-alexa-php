@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Test\Response\Directives\APL\StandardCommand;
+namespace Rboschin\AmazonAlexa\Test\Response\Directives\APL\StandardCommand;
 
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Document\RepeatMode;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Document\Value;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\StandardCommand\AnimateItemCommand;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Document\RepeatMode;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Document\Value;
+use Rboschin\AmazonAlexa\Response\Directives\APL\StandardCommand\AnimateItemCommand;
 use PHPUnit\Framework\TestCase;
 
 class AnimateItemCommandTest extends TestCase

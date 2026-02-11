@@ -2,8 +2,11 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Exception;
+namespace Rboschin\AmazonAlexa\Exception;
 
-class OutdatedCertExceptionException extends \Exception
+/**
+ * @deprecated Use OutdatedCertException instead. This class will be removed in version 3.0.0.
+ */
+class OutdatedCertExceptionException extends OutdatedCertException
 {
 }

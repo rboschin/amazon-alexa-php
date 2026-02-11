@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Test\Request;
+namespace Rboschin\AmazonAlexa\Test\Request;
 
-use MaxBeckers\AmazonAlexa\Request\PagerTag;
+use Rboschin\AmazonAlexa\Request\PagerTag;
 use PHPUnit\Framework\TestCase;
 
 class PagerTagTest extends TestCase

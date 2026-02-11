@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Test\Response\Directives\APL\AVGItem;
+namespace Rboschin\AmazonAlexa\Test\Response\Directives\APL\AVGItem;
 
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\AVGItem\AVGItem;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\AVGItem\Group;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Document\AVGItemType;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\AVGFilter\AVGFilter;
+use Rboschin\AmazonAlexa\Response\Directives\APL\AVGItem\AVGItem;
+use Rboschin\AmazonAlexa\Response\Directives\APL\AVGItem\Group;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Document\AVGItemType;
+use Rboschin\AmazonAlexa\Response\Directives\APL\AVGFilter\AVGFilter;
 use PHPUnit\Framework\TestCase;
 
 class GroupTest extends TestCase

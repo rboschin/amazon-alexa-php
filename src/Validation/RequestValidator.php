@@ -2,16 +2,23 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Validation;
+namespace Rboschin\AmazonAlexa\Validation;
 
 use GuzzleHttp\Client;
-use MaxBeckers\AmazonAlexa\Exception\OutdatedCertExceptionException;
-use MaxBeckers\AmazonAlexa\Exception\RequestInvalidSignatureException;
-use MaxBeckers\AmazonAlexa\Exception\RequestInvalidTimestampException;
-use MaxBeckers\AmazonAlexa\Request\Request;
+use Rboschin\AmazonAlexa\Exception\OutdatedCertExceptionException;
+use Rboschin\AmazonAlexa\Exception\RequestInvalidSignatureException;
+use Rboschin\AmazonAlexa\Exception\RequestInvalidTimestampException;
+use Rboschin\AmazonAlexa\Request\Request;
+use Psr\Http\Client\ClientInterface as Psr18ClientInterface;
 
 /**
  * This is a validator for amazon echo requests. It validates the timestamp of the request and the request signature.
+ * 
+ * Features:
+ * - PSR-18 HTTP client support
+ * - Configurable certificate cache directory
+ * - Option to disable signature validation (development only)
+ * - Dedicated certificate validation via CertValidator
  */
 class RequestValidator
 {
@@ -20,14 +27,26 @@ class RequestValidator
      */
     public const TIMESTAMP_VALID_TOLERANCE_SECONDS = 150;
 
+    private CertValidator $certValidator;
+
     /**
      * @param int $timestampTolerance Timestamp tolerance in seconds
-     * @param Client $client HTTP client for fetching certificates
+     * @param ClientInterface|Client|null $client HTTP client for fetching certificates (PSR-18 or Guzzle)
+     * @param string|null $certCacheDir Directory for certificate cache
+     * @param bool $disableSignatureValidation Disable signature validation (dev/test only)
      */
     public function __construct(
         protected int $timestampTolerance = self::TIMESTAMP_VALID_TOLERANCE_SECONDS,
-        public Client $client = new Client(),
+        protected $client = null,
+        ?string $certCacheDir = null,
+        protected bool $disableSignatureValidation = false,
     ) {
+        $this->certValidator = new CertValidator($certCacheDir);
+        
+        // Default to Guzzle client if no client provided
+        if ($this->client === null) {
+            $this->client = new Client();
+        }
     }
 
     /**
@@ -40,6 +59,12 @@ class RequestValidator
     public function validate(Request $request): void
     {
         $this->validateTimestamp($request);
+        
+        if ($this->disableSignatureValidation) {
+            // WARNING: Signature validation disabled - use only in development/testing
+            return;
+        }
+        
         try {
             $this->validateSignature($request);
         } catch (OutdatedCertExceptionException $e) {
@@ -82,110 +107,97 @@ class RequestValidator
         }
 
         // validate cert url
-        $this->validateCertUrl($request);
+        $this->certValidator->validateCertUrl($request);
 
-        // generate local cert path
-        $localCertPath = sys_get_temp_dir() . DIRECTORY_SEPARATOR . md5($request->signatureCertChainUrl) . '.pem';
-
-        // check if pem file is already downloaded to temp or download.
-        $certData = $this->fetchCertData($request, $localCertPath);
+        // fetch cert data using appropriate HTTP client
+        $certData = $this->certValidator->fetchCertData($request, $this->createHttpClientCallback());
 
         // openssl cert validation
-        $this->verifyCert($request, $certData);
+        $this->certValidator->verifyCert($request, $certData);
 
         // parse cert
-        $certContent = $this->parseCertData($certData);
+        $certContent = $this->certValidator->parseCertData($certData);
 
         // validate cert
-        $this->validateCertContent($certContent, $localCertPath);
+        $this->certValidator->validateCertContent($certContent, $request->signatureCertChainUrl);
     }
 
     /**
-     * @throws RequestInvalidSignatureException
+     * Create HTTP client callback that works with both PSR-18 and Guzzle clients
      */
-    private function validateCertUrl(Request $request): void
+    private function createHttpClientCallback(): callable
     {
-        if (false === (bool) preg_match("/https:\/\/s3.amazonaws.com(\:443)?\/echo.api\/*/i", $request->signatureCertChainUrl)) {
-            throw new RequestInvalidSignatureException('Invalid cert url.');
-        }
-    }
-
-    /**
-     * @throws RequestInvalidSignatureException
-     */
-    private function fetchCertData(Request $request, string $localCertPath): string
-    {
-        if (!file_exists($localCertPath)) {
-            $response = $this->client->request('GET', $request->signatureCertChainUrl);
-
-            if ($response->getStatusCode() !== 200) {
-                throw new RequestInvalidSignatureException('Can\'t fetch cert from URL.');
+        return function (string $url): array {
+            if ($this->client instanceof Psr18ClientInterface) {
+                // PSR-18 client
+                $request = $this->createPsr18Request($url);
+                $response = $this->client->sendRequest($request);
+                
+                return [
+                    'status_code' => $response->getStatusCode(),
+                    'body' => (string) $response->getBody(),
+                ];
+            } else {
+                // Guzzle client
+                $response = $this->client->request('GET', $url);
+                
+                return [
+                    'status_code' => $response->getStatusCode(),
+                    'body' => $response->getBody()->getContents(),
+                ];
             }
-
-            $certData = $response->getBody()->getContents();
-            @file_put_contents($localCertPath, $certData);
-        } else {
-            $certData = @file_get_contents($localCertPath);
-        }
-
-        return $certData;
+        };
     }
 
     /**
-     * @throws RequestInvalidSignatureException
+     * Create PSR-7 request for PSR-18 clients
      */
-    private function verifyCert(Request $request, string $certData): void
+    private function createPsr18Request(string $url): \Psr\Http\Message\RequestInterface
     {
-        if (1 !== @openssl_verify($request->amazonRequestBody, base64_decode($request->signature, true), $certData, 'sha1')) {
-            throw new RequestInvalidSignatureException('Cert ssl verification failed.');
+        // Try to create PSR-7 request using available factories
+        if (class_exists(\GuzzleHttp\Psr7\Request::class)) {
+            return new \GuzzleHttp\Psr7\Request('GET', $url);
         }
+        
+        // Fallback - create simple request using PSR-17 factory if available
+        if (class_exists(\Nyholm\Psr7\Factory\Psr17Factory::class)) {
+            $factory = new \Nyholm\Psr7\Factory\Psr17Factory();
+            return $factory->createRequest('GET', $url);
+        }
+        
+        // If no PSR-7 implementation is available, throw an exception
+        throw new \RuntimeException('No PSR-7 implementation found. Please install guzzlehttp/psr7 or nyholm/psr7.');
     }
 
     /**
-     * @throws RequestInvalidSignatureException
+     * Get certificate cache directory
      */
-    private function parseCertData(string $certData): array
+    public function getCertCacheDir(): string
     {
-        $certContent = @openssl_x509_parse($certData);
-        if (empty($certContent)) {
-            throw new RequestInvalidSignatureException('Parse cert failed.');
-        }
-
-        return $certContent;
+        return $this->certValidator->getCertCacheDir();
     }
 
     /**
-     * @throws OutdatedCertExceptionException
-     * @throws RequestInvalidSignatureException
+     * Check if signature validation is disabled
      */
-    private function validateCertContent(array $cert, string $localCertPath): void
+    public function isSignatureValidationDisabled(): bool
     {
-        $this->validateCertSubject($cert);
-        $this->validateCertValidTime($cert, $localCertPath);
+        return $this->disableSignatureValidation;
     }
 
     /**
-     * @throws RequestInvalidSignatureException
+     * Get timestamp tolerance
      */
-    private function validateCertSubject(array $cert): void
+    public function getTimestampTolerance(): int
     {
-        if (false === isset($cert['extensions']['subjectAltName']) ||
-            false === stristr($cert['extensions']['subjectAltName'], 'echo-api.amazon.com')
-        ) {
-            throw new RequestInvalidSignatureException('Cert subject error.');
-        }
+        return $this->timestampTolerance;
     }
 
     /**
-     * @throws OutdatedCertExceptionException
+     * Get HTTP client
      */
-    private function validateCertValidTime(array $cert, string $localCertPath): void
+    public function getClient()
     {
-        if (false === isset($cert['validTo_time_t']) || time() > $cert['validTo_time_t'] || false === isset($cert['validFrom_time_t']) || time() < $cert['validFrom_time_t']) {
-            if (file_exists($localCertPath)) {
-                /* @scrutinizer ignore-unhandled */ @unlink($localCertPath);
-            }
-            throw new OutdatedCertExceptionException('Cert is outdated.');
-        }
+        return $this->client;
     }
 }

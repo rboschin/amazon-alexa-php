@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Response\Directives\VideoApp;
+namespace Rboschin\AmazonAlexa\Response\Directives\VideoApp;
 
 class VideoItem
 {

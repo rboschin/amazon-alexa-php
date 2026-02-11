@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Response\Directives\AudioPlayer;
+namespace Rboschin\AmazonAlexa\Response\Directives\AudioPlayer;
 
 class PlaybackNearlyFinished extends AbstractPlaybackDirective
 {

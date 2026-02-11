@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Test\Response\Directives\APL\StandardCommand;
+namespace Rboschin\AmazonAlexa\Test\Response\Directives\APL\StandardCommand;
 
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\StandardCommand\AbstractStandardCommand;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\StandardCommand\OpenURLCommand;
+use Rboschin\AmazonAlexa\Response\Directives\APL\StandardCommand\AbstractStandardCommand;
+use Rboschin\AmazonAlexa\Response\Directives\APL\StandardCommand\OpenURLCommand;
 use PHPUnit\Framework\TestCase;
 
 class OpenURLCommandTest extends TestCase

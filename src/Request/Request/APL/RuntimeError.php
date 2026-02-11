@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Request\Request\APL;
+namespace Rboschin\AmazonAlexa\Request\Request\APL;
 
-use MaxBeckers\AmazonAlexa\Helper\PropertyHelper;
+use Rboschin\AmazonAlexa\Helper\PropertyHelper;
 
 class RuntimeError
 {

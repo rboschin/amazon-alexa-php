@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Test\Response\Directives\APL\Document;
+namespace Rboschin\AmazonAlexa\Test\Response\Directives\APL\Document;
 
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Document\Environment;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Document\LayoutDirection;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Document\Environment;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Document\LayoutDirection;
 use PHPUnit\Framework\TestCase;
 
 class EnvironmentTest extends TestCase

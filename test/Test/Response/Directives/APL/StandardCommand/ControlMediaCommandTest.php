@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Test\Response\Directives\APL\StandardCommand;
+namespace Rboschin\AmazonAlexa\Test\Response\Directives\APL\StandardCommand;
 
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Document\ControlMediaCommand as ControlMediaCommandType;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\StandardCommand\ControlMediaCommand;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Document\ControlMediaCommand as ControlMediaCommandType;
+use Rboschin\AmazonAlexa\Response\Directives\APL\StandardCommand\ControlMediaCommand;
 use PHPUnit\Framework\TestCase;
 
 class ControlMediaCommandTest extends TestCase

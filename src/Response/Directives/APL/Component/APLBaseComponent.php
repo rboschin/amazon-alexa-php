@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Response\Directives\APL\Component;
+namespace Rboschin\AmazonAlexa\Response\Directives\APL\Component;
 
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Document\APLComponentType;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Document\Bind;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Document\Display;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Document\LayoutDirection;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Document\PointerEvents;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Document\Role;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Document\TickHandler;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Document\VisibilityChangeHandler;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\StandardCommand\AbstractStandardCommand;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Document\APLComponentType;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Document\Bind;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Document\Display;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Document\LayoutDirection;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Document\PointerEvents;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Document\Role;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Document\TickHandler;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Document\VisibilityChangeHandler;
+use Rboschin\AmazonAlexa\Response\Directives\APL\StandardCommand\AbstractStandardCommand;
 
 abstract class APLBaseComponent implements \JsonSerializable
 {

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Response\Directives\APL\AVGFilter;
+namespace Rboschin\AmazonAlexa\Response\Directives\APL\AVGFilter;
 
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Document\AVGFilterType;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Document\AVGFilterType;
 
 class DropShadow extends AVGFilter implements \JsonSerializable
 {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Response\Directives\Dialog\UpdateDynamicEntities;
+namespace Rboschin\AmazonAlexa\Response\Directives\Dialog\UpdateDynamicEntities;
 
 class Clear extends UpdateDynamicEntities
 {

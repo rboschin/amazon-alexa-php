@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Response\Directives\APL\Component;
+namespace Rboschin\AmazonAlexa\Response\Directives\APL\Component;
 
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Document\APLComponentType;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Document\APLComponentType;
 
 class TouchWrapperComponent extends TouchableComponent implements \JsonSerializable
 {

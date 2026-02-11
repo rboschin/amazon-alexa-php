@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Test\Response\Directives\APL\Component;
+namespace Rboschin\AmazonAlexa\Test\Response\Directives\APL\Component;
 
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Component\Entity;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Component\Entity;
 use PHPUnit\Framework\TestCase;
 
 class EntityTest extends TestCase

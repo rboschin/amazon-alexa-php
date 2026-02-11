@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Test\Response\Directives\APL\AVGItem;
+namespace Rboschin\AmazonAlexa\Test\Response\Directives\APL\AVGItem;
 
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\AVGItem\AVGItem;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\AVGItem\Path;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Document\AVGItemType;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Document\StrokeLineCap;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Document\StrokeLineJoin;
+use Rboschin\AmazonAlexa\Response\Directives\APL\AVGItem\AVGItem;
+use Rboschin\AmazonAlexa\Response\Directives\APL\AVGItem\Path;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Document\AVGItemType;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Document\StrokeLineCap;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Document\StrokeLineJoin;
 use PHPUnit\Framework\TestCase;
 
 class PathTest extends TestCase

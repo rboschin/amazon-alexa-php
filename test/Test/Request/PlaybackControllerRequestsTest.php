@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Test\Request;
+namespace Rboschin\AmazonAlexa\Test\Request;
 
-use MaxBeckers\AmazonAlexa\Request\Request;
-use MaxBeckers\AmazonAlexa\Request\Request\PlaybackController\NextCommandIssued;
-use MaxBeckers\AmazonAlexa\Request\Request\PlaybackController\PauseCommandIssued;
-use MaxBeckers\AmazonAlexa\Request\Request\PlaybackController\PlayCommandIssued;
-use MaxBeckers\AmazonAlexa\Request\Request\PlaybackController\PreviousCommandIssued;
+use Rboschin\AmazonAlexa\Request\Request;
+use Rboschin\AmazonAlexa\Request\Request\PlaybackController\NextCommandIssued;
+use Rboschin\AmazonAlexa\Request\Request\PlaybackController\PauseCommandIssued;
+use Rboschin\AmazonAlexa\Request\Request\PlaybackController\PlayCommandIssued;
+use Rboschin\AmazonAlexa\Request\Request\PlaybackController\PreviousCommandIssued;
 use PHPUnit\Framework\TestCase;
 
 class PlaybackControllerRequestsTest extends TestCase

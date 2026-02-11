@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Test\Response\Directives\APL\AVGFilter;
+namespace Rboschin\AmazonAlexa\Test\Response\Directives\APL\AVGFilter;
 
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\AVGFilter\AVGFilter;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\AVGFilter\DropShadow;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Document\AVGFilterType;
+use Rboschin\AmazonAlexa\Response\Directives\APL\AVGFilter\AVGFilter;
+use Rboschin\AmazonAlexa\Response\Directives\APL\AVGFilter\DropShadow;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Document\AVGFilterType;
 use PHPUnit\Framework\TestCase;
 
 class DropShadowTest extends TestCase

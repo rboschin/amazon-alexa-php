@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Test\Response\Directives\APL;
+namespace Rboschin\AmazonAlexa\Test\Response\Directives\APL;
 
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\ExecuteCommandsDirective;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\StandardCommand\AbstractStandardCommand;
+use Rboschin\AmazonAlexa\Response\Directives\APL\ExecuteCommandsDirective;
+use Rboschin\AmazonAlexa\Response\Directives\APL\StandardCommand\AbstractStandardCommand;
 use PHPUnit\Framework\TestCase;
 
 class ExecuteCommandsDirectiveTest extends TestCase

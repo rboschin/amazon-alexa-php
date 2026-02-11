@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Test\Response\Directives\APL\StandardCommand;
+namespace Rboschin\AmazonAlexa\Test\Response\Directives\APL\StandardCommand;
 
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Document\SetPagePosition;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\StandardCommand\SetPageCommand;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Document\SetPagePosition;
+use Rboschin\AmazonAlexa\Response\Directives\APL\StandardCommand\SetPageCommand;
 use PHPUnit\Framework\TestCase;
 
 class SetPageCommandTest extends TestCase

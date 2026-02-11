@@ -2,38 +2,38 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Request;
+namespace Rboschin\AmazonAlexa\Request;
 
-use MaxBeckers\AmazonAlexa\Exception\MissingRequestDataException;
-use MaxBeckers\AmazonAlexa\Exception\MissingRequiredHeaderException;
-use MaxBeckers\AmazonAlexa\Helper\PropertyHelper;
-use MaxBeckers\AmazonAlexa\Request\Request\AbstractRequest;
-use MaxBeckers\AmazonAlexa\Request\Request\AlexaSkillEvent\SkillAccountLinkedRequest;
-use MaxBeckers\AmazonAlexa\Request\Request\AlexaSkillEvent\SkillDisabledRequest;
-use MaxBeckers\AmazonAlexa\Request\Request\AlexaSkillEvent\SkillEnabledRequest;
-use MaxBeckers\AmazonAlexa\Request\Request\AlexaSkillEvent\SkillPermissionAcceptedRequest;
-use MaxBeckers\AmazonAlexa\Request\Request\AlexaSkillEvent\SkillPermissionChangedRequest;
-use MaxBeckers\AmazonAlexa\Request\Request\APL\LoadIndexListDataRequest;
-use MaxBeckers\AmazonAlexa\Request\Request\APL\LoadTokenListDataRequest;
-use MaxBeckers\AmazonAlexa\Request\Request\APL\RuntimeErrorRequest;
-use MaxBeckers\AmazonAlexa\Request\Request\APL\UserEventRequest;
-use MaxBeckers\AmazonAlexa\Request\Request\AudioPlayer\PlaybackFailedRequest;
-use MaxBeckers\AmazonAlexa\Request\Request\AudioPlayer\PlaybackFinishedRequest;
-use MaxBeckers\AmazonAlexa\Request\Request\AudioPlayer\PlaybackNearlyFinishedRequest;
-use MaxBeckers\AmazonAlexa\Request\Request\AudioPlayer\PlaybackStartedRequest;
-use MaxBeckers\AmazonAlexa\Request\Request\AudioPlayer\PlaybackStoppedRequest;
-use MaxBeckers\AmazonAlexa\Request\Request\CanFulfill\CanFulfillIntentRequest;
-use MaxBeckers\AmazonAlexa\Request\Request\Display\ElementSelectedRequest;
-use MaxBeckers\AmazonAlexa\Request\Request\GameEngine\InputHandlerEvent;
-use MaxBeckers\AmazonAlexa\Request\Request\PlaybackController\NextCommandIssued;
-use MaxBeckers\AmazonAlexa\Request\Request\PlaybackController\PauseCommandIssued;
-use MaxBeckers\AmazonAlexa\Request\Request\PlaybackController\PlayCommandIssued;
-use MaxBeckers\AmazonAlexa\Request\Request\PlaybackController\PreviousCommandIssued;
-use MaxBeckers\AmazonAlexa\Request\Request\Standard\IntentRequest;
-use MaxBeckers\AmazonAlexa\Request\Request\Standard\LaunchRequest;
-use MaxBeckers\AmazonAlexa\Request\Request\Standard\SessionEndedRequest;
-use MaxBeckers\AmazonAlexa\Request\Request\System\ConnectionsResponseRequest;
-use MaxBeckers\AmazonAlexa\Request\Request\System\ExceptionEncounteredRequest;
+use Rboschin\AmazonAlexa\Exception\MissingRequestDataException;
+use Rboschin\AmazonAlexa\Exception\MissingRequiredHeaderException;
+use Rboschin\AmazonAlexa\Helper\PropertyHelper;
+use Rboschin\AmazonAlexa\Request\Request\AbstractRequest;
+use Rboschin\AmazonAlexa\Request\Request\AlexaSkillEvent\SkillAccountLinkedRequest;
+use Rboschin\AmazonAlexa\Request\Request\AlexaSkillEvent\SkillDisabledRequest;
+use Rboschin\AmazonAlexa\Request\Request\AlexaSkillEvent\SkillEnabledRequest;
+use Rboschin\AmazonAlexa\Request\Request\AlexaSkillEvent\SkillPermissionAcceptedRequest;
+use Rboschin\AmazonAlexa\Request\Request\AlexaSkillEvent\SkillPermissionChangedRequest;
+use Rboschin\AmazonAlexa\Request\Request\APL\LoadIndexListDataRequest;
+use Rboschin\AmazonAlexa\Request\Request\APL\LoadTokenListDataRequest;
+use Rboschin\AmazonAlexa\Request\Request\APL\RuntimeErrorRequest;
+use Rboschin\AmazonAlexa\Request\Request\APL\UserEventRequest;
+use Rboschin\AmazonAlexa\Request\Request\AudioPlayer\PlaybackFailedRequest;
+use Rboschin\AmazonAlexa\Request\Request\AudioPlayer\PlaybackFinishedRequest;
+use Rboschin\AmazonAlexa\Request\Request\AudioPlayer\PlaybackNearlyFinishedRequest;
+use Rboschin\AmazonAlexa\Request\Request\AudioPlayer\PlaybackStartedRequest;
+use Rboschin\AmazonAlexa\Request\Request\AudioPlayer\PlaybackStoppedRequest;
+use Rboschin\AmazonAlexa\Request\Request\CanFulfill\CanFulfillIntentRequest;
+use Rboschin\AmazonAlexa\Request\Request\Display\ElementSelectedRequest;
+use Rboschin\AmazonAlexa\Request\Request\GameEngine\InputHandlerEvent;
+use Rboschin\AmazonAlexa\Request\Request\PlaybackController\NextCommandIssued;
+use Rboschin\AmazonAlexa\Request\Request\PlaybackController\PauseCommandIssued;
+use Rboschin\AmazonAlexa\Request\Request\PlaybackController\PlayCommandIssued;
+use Rboschin\AmazonAlexa\Request\Request\PlaybackController\PreviousCommandIssued;
+use Rboschin\AmazonAlexa\Request\Request\Standard\IntentRequest;
+use Rboschin\AmazonAlexa\Request\Request\Standard\LaunchRequest;
+use Rboschin\AmazonAlexa\Request\Request\Standard\SessionEndedRequest;
+use Rboschin\AmazonAlexa\Request\Request\System\ConnectionsResponseRequest;
+use Rboschin\AmazonAlexa\Request\Request\System\ExceptionEncounteredRequest;
 
 class Request
 {

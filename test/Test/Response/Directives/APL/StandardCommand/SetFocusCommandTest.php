@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Test\Response\Directives\APL\StandardCommand;
+namespace Rboschin\AmazonAlexa\Test\Response\Directives\APL\StandardCommand;
 
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\StandardCommand\SetFocusCommand;
+use Rboschin\AmazonAlexa\Response\Directives\APL\StandardCommand\SetFocusCommand;
 use PHPUnit\Framework\TestCase;
 
 class SetFocusCommandTest extends TestCase

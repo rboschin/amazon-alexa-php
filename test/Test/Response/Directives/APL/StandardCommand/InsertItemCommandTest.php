@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Test\Response\Directives\APL\StandardCommand;
+namespace Rboschin\AmazonAlexa\Test\Response\Directives\APL\StandardCommand;
 
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\StandardCommand\InsertItemCommand;
+use Rboschin\AmazonAlexa\Response\Directives\APL\StandardCommand\InsertItemCommand;
 use PHPUnit\Framework\TestCase;
 
 class InsertItemCommandTest extends TestCase

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Test\Response\Directives\APL\Document;
+namespace Rboschin\AmazonAlexa\Test\Response\Directives\APL\Document;
 
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Document\StyleValue;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Document\StyleValue;
 use PHPUnit\Framework\TestCase;
 
 class StyleValueTest extends TestCase

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Response\Directives\APL\AVGItem;
+namespace Rboschin\AmazonAlexa\Response\Directives\APL\AVGItem;
 
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Document\AVGItemType;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Document\StrokeLineCap;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Document\StrokeLineJoin;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Document\AVGItemType;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Document\StrokeLineCap;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Document\StrokeLineJoin;
 
 class Path extends AVGItem implements \JsonSerializable
 {

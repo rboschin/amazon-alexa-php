@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Response\Directives\GadgetController;
+namespace Rboschin\AmazonAlexa\Response\Directives\GadgetController;
 
-use MaxBeckers\AmazonAlexa\Response\Directives\Directive;
+use Rboschin\AmazonAlexa\Response\Directives\Directive;
 
 class SetLightDirective extends Directive
 {

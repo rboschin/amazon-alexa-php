@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Response\Directives\AudioPlayer;
+namespace Rboschin\AmazonAlexa\Response\Directives\AudioPlayer;
 
-use MaxBeckers\AmazonAlexa\Response\Directives\Display\Image;
+use Rboschin\AmazonAlexa\Response\Directives\Display\Image;
 
 class Metadata implements \JsonSerializable
 {

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Test\Response\Directives\APL\Document;
+namespace Rboschin\AmazonAlexa\Test\Response\Directives\APL\Document;
 
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Document\BackgroundType;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Document\Gradient;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Document\BackgroundType;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Document\Gradient;
 use PHPUnit\Framework\TestCase;
 
 class GradientTest extends TestCase

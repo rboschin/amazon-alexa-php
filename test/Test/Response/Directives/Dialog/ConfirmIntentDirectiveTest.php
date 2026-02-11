@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Test\Response\Directives\Dialog;
+namespace Rboschin\AmazonAlexa\Test\Response\Directives\Dialog;
 
-use MaxBeckers\AmazonAlexa\Intent\Intent;
-use MaxBeckers\AmazonAlexa\Response\Directives\Dialog\ConfirmIntentDirective;
+use Rboschin\AmazonAlexa\Intent\Intent;
+use Rboschin\AmazonAlexa\Response\Directives\Dialog\ConfirmIntentDirective;
 use PHPUnit\Framework\TestCase;
 
 class ConfirmIntentDirectiveTest extends TestCase

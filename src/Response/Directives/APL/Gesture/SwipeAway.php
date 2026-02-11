@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Response\Directives\APL\Gesture;
+namespace Rboschin\AmazonAlexa\Response\Directives\APL\Gesture;
 
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Component\APLBaseComponent;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Document\GestureType;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Document\SwipeAction;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Document\SwipeDirection;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\StandardCommand\AbstractStandardCommand;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Component\APLBaseComponent;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Document\GestureType;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Document\SwipeAction;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Document\SwipeDirection;
+use Rboschin\AmazonAlexa\Response\Directives\APL\StandardCommand\AbstractStandardCommand;
 
 class SwipeAway extends AbstractGesture
 {

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Request\Request\AlexaSkillEvent;
+namespace Rboschin\AmazonAlexa\Request\Request\AlexaSkillEvent;
 
-use MaxBeckers\AmazonAlexa\Request\Request\AbstractRequest;
+use Rboschin\AmazonAlexa\Request\Request\AbstractRequest;
 
 abstract class AlexaSkillEventRequest extends AbstractRequest
 {

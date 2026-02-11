@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Test\Request;
+namespace Rboschin\AmazonAlexa\Test\Request;
 
-use MaxBeckers\AmazonAlexa\Request\Request;
-use MaxBeckers\AmazonAlexa\Request\Request\Standard\LaunchRequest;
+use Rboschin\AmazonAlexa\Request\Request;
+use Rboschin\AmazonAlexa\Request\Request\Standard\LaunchRequest;
 use PHPUnit\Framework\TestCase;
 
 class LaunchRequestTest extends TestCase

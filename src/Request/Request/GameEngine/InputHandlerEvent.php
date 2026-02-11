@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Request\Request\GameEngine;
+namespace Rboschin\AmazonAlexa\Request\Request\GameEngine;
 
-use MaxBeckers\AmazonAlexa\Helper\PropertyHelper;
-use MaxBeckers\AmazonAlexa\Request\Request\AbstractRequest;
-use MaxBeckers\AmazonAlexa\Request\Request\GameEngine\Event\Event;
-use MaxBeckers\AmazonAlexa\Request\Request\Standard\StandardRequest;
+use Rboschin\AmazonAlexa\Helper\PropertyHelper;
+use Rboschin\AmazonAlexa\Request\Request\AbstractRequest;
+use Rboschin\AmazonAlexa\Request\Request\GameEngine\Event\Event;
+use Rboschin\AmazonAlexa\Request\Request\Standard\StandardRequest;
 
 class InputHandlerEvent extends StandardRequest
 {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Intent;
+namespace Rboschin\AmazonAlexa\Intent;
 
 class Resolution implements \JsonSerializable
 {

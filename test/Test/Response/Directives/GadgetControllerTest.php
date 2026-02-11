@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Test\Response\Directives;
+namespace Rboschin\AmazonAlexa\Test\Response\Directives;
 
-use MaxBeckers\AmazonAlexa\Response\Directives\GadgetController\Animation;
-use MaxBeckers\AmazonAlexa\Response\Directives\GadgetController\Parameters;
-use MaxBeckers\AmazonAlexa\Response\Directives\GadgetController\Sequence;
-use MaxBeckers\AmazonAlexa\Response\Directives\GadgetController\SetLightDirective;
+use Rboschin\AmazonAlexa\Response\Directives\GadgetController\Animation;
+use Rboschin\AmazonAlexa\Response\Directives\GadgetController\Parameters;
+use Rboschin\AmazonAlexa\Response\Directives\GadgetController\Sequence;
+use Rboschin\AmazonAlexa\Response\Directives\GadgetController\SetLightDirective;
 use PHPUnit\Framework\TestCase;
 
 class GadgetControllerTest extends TestCase

@@ -1,7 +1,7 @@
 {
-  "name": "maxbeckers/amazon-alexa-php",
+  "name": "rboschin/amazon-alexa-php",
   "type": "library",
-  "description": "Php library for amazon echo (alexa) skill development.",
+  "description": "A PHP library for developing Amazon Alexa skills with modern fluent APIs and simplified development workflow.",
   "keywords": [
     "alexa",
     "alexa-skill",
@@ -17,27 +17,30 @@
     "php82",
     "php83",
     "skill",
-    "alexa-custom-skill",
-    "library",
-    "ssml",
-    "apl"
+    "alexa-custom-skill"
   ],
   "license": "MIT",
   "support": {
-    "issues": "https://github.com/maxbeckers/amazon-alexa-php/issues",
-    "source": "https://github.com/maxbeckers/amazon-alexa-php"
+    "issues": "https://github.com/rboschin/amazon-alexa-php/issues",
+    "source": "https://github.com/rboschin/amazon-alexa-php"
   },
   "authors": [
     {
-      "name": "Maximilian Beckers",
-      "email": "beckers.maximilian@gmail.com",
+      "name": "Roberto Boschin",
+      "email": "rboschin@example.com",
       "role": "Developer"
     }
   ],
-  "minimum-stability": "dev",
+  "prefer-stable": true,
   "require": {
     "php": ">=8.2",
     "guzzlehttp/guzzle": "^7.0"
+  },
+  "suggest": {
+    "psr/http-client": "For using PSR-18 HTTP clients with RequestValidator",
+    "psr/http-factory": "For PSR-7 message factory support",
+    "guzzlehttp/psr7": "PSR-7 implementation for PSR-18 clients",
+    "nyholm/psr7": "Alternative PSR-7 implementation"
   },
   "require-dev": {
     "friendsofphp/php-cs-fixer": "^3.0",
@@ -45,12 +48,12 @@
   },
   "autoload": {
     "psr-4": {
-      "MaxBeckers\\AmazonAlexa\\": "src/"
+      "Rboschin\\AmazonAlexa\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "MaxBeckers\\AmazonAlexa\\Test\\": "test/Test/"
+      "Rboschin\\AmazonAlexa\\Test\\": "test/Test/"
     }
   },
   "scripts": {

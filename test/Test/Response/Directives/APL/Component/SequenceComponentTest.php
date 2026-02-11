@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Test\Response\Directives\APL\Component;
+namespace Rboschin\AmazonAlexa\Test\Response\Directives\APL\Component;
 
-use MaxBeckers\AmazonAlexa\Request\ScrollDirection;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Component\SequenceComponent;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Document\APLComponentType;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Document\Snap;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\StandardCommand\AbstractStandardCommand;
+use Rboschin\AmazonAlexa\Request\ScrollDirection;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Component\SequenceComponent;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Document\APLComponentType;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Document\Snap;
+use Rboschin\AmazonAlexa\Response\Directives\APL\StandardCommand\AbstractStandardCommand;
 use PHPUnit\Framework\TestCase;
 
 class SequenceComponentTest extends TestCase
@@ -132,7 +132,7 @@ class SequenceComponentTest extends TestCase
     {
         $component = new SequenceComponent();
 
-        $this->assertInstanceOf(\MaxBeckers\AmazonAlexa\Response\Directives\APL\Component\APLBaseComponent::class, $component);
+        $this->assertInstanceOf(\Rboschin\AmazonAlexa\Response\Directives\APL\Component\APLBaseComponent::class, $component);
     }
 
     public function testUsesActionableComponentTrait(): void
@@ -140,7 +140,7 @@ class SequenceComponentTest extends TestCase
         $component = new SequenceComponent();
 
         $this->assertTrue(in_array(
-            \MaxBeckers\AmazonAlexa\Response\Directives\APL\Component\Traits\ActionableComponentTrait::class,
+            \Rboschin\AmazonAlexa\Response\Directives\APL\Component\Traits\ActionableComponentTrait::class,
             class_uses($component),
             true
         ));
@@ -151,7 +151,7 @@ class SequenceComponentTest extends TestCase
         $component = new SequenceComponent();
 
         $this->assertTrue(in_array(
-            \MaxBeckers\AmazonAlexa\Response\Directives\APL\Component\Traits\MultiChildComponentTrait::class,
+            \Rboschin\AmazonAlexa\Response\Directives\APL\Component\Traits\MultiChildComponentTrait::class,
             class_uses($component),
             true
         ));

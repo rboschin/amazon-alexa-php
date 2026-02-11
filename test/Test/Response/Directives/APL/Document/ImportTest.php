@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Test\Response\Directives\APL\Document;
+namespace Rboschin\AmazonAlexa\Test\Response\Directives\APL\Document;
 
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Document\Import;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Document\ImportType;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Document\Import;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Document\ImportType;
 use PHPUnit\Framework\TestCase;
 
 class ImportTest extends TestCase

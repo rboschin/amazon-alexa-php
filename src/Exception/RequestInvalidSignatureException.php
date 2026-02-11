@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Exception;
+namespace Rboschin\AmazonAlexa\Exception;
 
 class RequestInvalidSignatureException extends \Exception
 {

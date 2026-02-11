@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Helper;
+namespace Rboschin\AmazonAlexa\Helper;
 
-use MaxBeckers\AmazonAlexa\Exception\InvalidSsmlException;
+use Rboschin\AmazonAlexa\Exception\InvalidSsmlException;
 
 class SsmlGenerator implements SsmlTypes
 {
@@ -19,11 +19,20 @@ class SsmlGenerator implements SsmlTypes
     }
 
     /**
-     * Clear the current ssml parts.
+     * Create a new SsmlGenerator instance
      */
-    public function clear(): void
+    public static function create(bool $escapeSpecialChars = false): self
+    {
+        return new self($escapeSpecialChars);
+    }
+
+    /**
+     * Clear current ssml parts.
+     */
+    public function clear(): self
     {
         $this->parts = [];
+        return $this;
     }
 
     public function getSsml(): string
@@ -34,9 +43,10 @@ class SsmlGenerator implements SsmlTypes
     /**
      * Say a default text.
      */
-    public function say(string $text): void
+    public function say(string $text): self
     {
         $this->parts[] = $this->textEscapeSpecialChars($text);
+        return $this;
     }
 
     /**
@@ -45,12 +55,13 @@ class SsmlGenerator implements SsmlTypes
      *
      * @throws InvalidSsmlException
      */
-    public function playMp3(string $mp3Url): void
+    public function playMp3(string $mp3Url): self
     {
         if (1 !== preg_match('/^(https:\/\/.*\.mp3.*)$/i', $mp3Url) && 0 !== strpos($mp3Url, 'soundbank://')) {
             throw new InvalidSsmlException(sprintf('"%s" in not a valid mp3 url!', $mp3Url));
         }
         $this->parts[] = sprintf('<audio src="%s" />', $mp3Url);
+        return $this;
     }
 
     /**
@@ -59,12 +70,13 @@ class SsmlGenerator implements SsmlTypes
      *
      * @throws InvalidSsmlException
      */
-    public function pauseStrength(string $strength): void
+    public function pauseStrength(string $strength): self
     {
         if (!in_array($strength, self::BREAK_STRENGTHS, true)) {
             throw new InvalidSsmlException(sprintf('Break strength must be one of "%s"!', implode(',', self::BREAK_STRENGTHS)));
         }
         $this->parts[] = sprintf('<break strength="%s" />', $strength);
+        return $this;
     }
 
     /**
@@ -73,12 +85,13 @@ class SsmlGenerator implements SsmlTypes
      *
      * @throws InvalidSsmlException
      */
-    public function pauseTime(string $time): void
+    public function pauseTime(string $time): self
     {
         if (1 !== preg_match('/^(\d+(s|ms))$/i', $time)) {
             throw new InvalidSsmlException('Time must be seconds or milliseconds!');
         }
         $this->parts[] = sprintf('<break time="%s" />', $time);
+        return $this;
     }
 
     /**
@@ -86,20 +99,21 @@ class SsmlGenerator implements SsmlTypes
      *
      * @throws InvalidSsmlException
      */
-    public function sayWithAmazonEffect(string $text, string $effect = self::AMAZON_EFFECT_WHISPERED): void
+    public function sayWithAmazonEffect(string $text, string $effect = self::AMAZON_EFFECT_WHISPERED): self
     {
         if (!in_array($effect, self::AMAZON_EFFECTS, true)) {
             throw new InvalidSsmlException(sprintf('Amazon:effect name must be one of "%s"!', implode(',', self::AMAZON_EFFECTS)));
         }
         $this->parts[] = sprintf('<amazon:effect name="%s">%s</amazon:effect>', $effect, $this->textEscapeSpecialChars($text));
+        return $this;
     }
 
     /**
      * Whisper a text.
      */
-    public function whisper(string $text): void
+    public function whisper(string $text): self
     {
-        $this->sayWithAmazonEffect($text, self::AMAZON_EFFECT_WHISPERED);
+        return $this->sayWithAmazonEffect($text, self::AMAZON_EFFECT_WHISPERED);
     }
 
     /**
@@ -107,12 +121,13 @@ class SsmlGenerator implements SsmlTypes
      *
      * @throws InvalidSsmlException
      */
-    public function emphasis(string $text, string $level): void
+    public function emphasis(string $text, string $level): self
     {
         if (!in_array($level, self::EMPHASIS_LEVELS, true)) {
             throw new InvalidSsmlException(sprintf('Emphasis level must be one of "%s"!', implode(',', self::EMPHASIS_LEVELS)));
         }
         $this->parts[] = sprintf('<emphasis level="%s">%s</emphasis>', $level, $this->textEscapeSpecialChars($text));
+        return $this;
     }
 
     /**
@@ -236,5 +251,84 @@ class SsmlGenerator implements SsmlTypes
         }
 
         return $text;
+    }
+
+    /**
+     * Say a number with proper pronunciation
+     */
+    public function number(int $number): self
+    {
+        $this->parts[] = sprintf('<say-as interpret-as="number">%d</say-as>', $number);
+        return $this;
+    }
+
+    /**
+     * Say an ordinal number (1st, 2nd, 3rd, etc.)
+     */
+    public function ordinal(int $number): self
+    {
+        $this->parts[] = sprintf('<say-as interpret-as="ordinal">%d</say-as>', $number);
+        return $this;
+    }
+
+    /**
+     * Say digits individually
+     */
+    public function digits(string $digits): self
+    {
+        $this->parts[] = sprintf('<say-as interpret-as="digits">%s</say-as>', $digits);
+        return $this;
+    }
+
+    /**
+     * Create a list of items with automatic pauses
+     */
+    public function list(array $items, string $pause = 'medium'): self
+    {
+        foreach ($items as $index => $item) {
+            $this->say($item);
+            
+            // Add pause between items except after the last one
+            if ($index < count($items) - 1) {
+                $this->pauseStrength($pause);
+            }
+        }
+        
+        return $this;
+    }
+
+    /**
+     * Create a countdown with pauses
+     */
+    public function countdown(int $start, int $end = 1): self
+    {
+        for ($i = $start; $i >= $end; $i--) {
+            $this->number($i);
+            
+            if ($i > $end) {
+                $this->pauseTime('1s');
+            }
+        }
+        
+        return $this;
+    }
+
+    /**
+     * Spell out a word letter by letter
+     */
+    public function spell(string $word): self
+    {
+        $letters = str_split(strtoupper($word));
+        
+        foreach ($letters as $index => $letter) {
+            $this->say($letter);
+            
+            // Add small pause between letters except after the last one
+            if ($index < count($letters) - 1) {
+                $this->pauseTime('200ms');
+            }
+        }
+        
+        return $this;
     }
 }

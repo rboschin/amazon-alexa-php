@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Test\Helper;
+namespace Rboschin\AmazonAlexa\Test\Helper;
 
 use GuzzleHttp\Client;
-use MaxBeckers\AmazonAlexa\Exception\DeviceApiCallException;
-use MaxBeckers\AmazonAlexa\Exception\MissingRequestDataException;
-use MaxBeckers\AmazonAlexa\Helper\DeviceAddressInformationHelper;
-use MaxBeckers\AmazonAlexa\Request\Context;
-use MaxBeckers\AmazonAlexa\Request\Device;
-use MaxBeckers\AmazonAlexa\Request\Request;
-use MaxBeckers\AmazonAlexa\Request\System;
+use Rboschin\AmazonAlexa\Exception\DeviceApiCallException;
+use Rboschin\AmazonAlexa\Exception\MissingRequestDataException;
+use Rboschin\AmazonAlexa\Helper\DeviceAddressInformationHelper;
+use Rboschin\AmazonAlexa\Request\Context;
+use Rboschin\AmazonAlexa\Request\Device;
+use Rboschin\AmazonAlexa\Request\Request;
+use Rboschin\AmazonAlexa\Request\System;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;

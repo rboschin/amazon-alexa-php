@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Test\Response\Directives\APL\AVGItem;
+namespace Rboschin\AmazonAlexa\Test\Response\Directives\APL\AVGItem;
 
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\AVGItem\AVGItem;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\AVGItem\Text;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Document\AVGItemType;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Document\FontStyle;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Document\FontWeight;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Document\TextAnchor;
+use Rboschin\AmazonAlexa\Response\Directives\APL\AVGItem\AVGItem;
+use Rboschin\AmazonAlexa\Response\Directives\APL\AVGItem\Text;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Document\AVGItemType;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Document\FontStyle;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Document\FontWeight;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Document\TextAnchor;
 use PHPUnit\Framework\TestCase;
 
 class TextTest extends TestCase

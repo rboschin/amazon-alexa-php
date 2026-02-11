@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Test\Response\Directives\Dialog\UpdateDynamicEntities;
+namespace Rboschin\AmazonAlexa\Test\Response\Directives\Dialog\UpdateDynamicEntities;
 
-use MaxBeckers\AmazonAlexa\Response\Directives\Dialog\Entity\Type;
-use MaxBeckers\AmazonAlexa\Response\Directives\Dialog\Entity\TypeValue;
-use MaxBeckers\AmazonAlexa\Response\Directives\Dialog\UpdateDynamicEntities\Replace;
+use Rboschin\AmazonAlexa\Response\Directives\Dialog\Entity\Type;
+use Rboschin\AmazonAlexa\Response\Directives\Dialog\Entity\TypeValue;
+use Rboschin\AmazonAlexa\Response\Directives\Dialog\UpdateDynamicEntities\Replace;
 use PHPUnit\Framework\TestCase;
 
 class ReplaceTest extends TestCase

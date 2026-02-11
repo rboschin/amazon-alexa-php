@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Request\Request\Standard;
+namespace Rboschin\AmazonAlexa\Request\Request\Standard;
 
-use MaxBeckers\AmazonAlexa\Helper\PropertyHelper;
-use MaxBeckers\AmazonAlexa\Intent\Intent;
-use MaxBeckers\AmazonAlexa\Request\Request\AbstractRequest;
+use Rboschin\AmazonAlexa\Helper\PropertyHelper;
+use Rboschin\AmazonAlexa\Intent\Intent;
+use Rboschin\AmazonAlexa\Request\Request\AbstractRequest;
 
 class IntentRequest extends StandardRequest
 {

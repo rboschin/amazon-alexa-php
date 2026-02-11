@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Test\Response\Directives\APL\Document;
+namespace Rboschin\AmazonAlexa\Test\Response\Directives\APL\Document;
 
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\AVGItem\AVGItem;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Document\Graphic;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Document\LayoutDirection;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Document\Parameter;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Document\ScaleType;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Document\Style;
+use Rboschin\AmazonAlexa\Response\Directives\APL\AVGItem\AVGItem;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Document\Graphic;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Document\LayoutDirection;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Document\Parameter;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Document\ScaleType;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Document\Style;
 use PHPUnit\Framework\TestCase;
 
 class GraphicTest extends TestCase

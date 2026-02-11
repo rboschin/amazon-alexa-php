@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Request\Request\Display;
+namespace Rboschin\AmazonAlexa\Request\Request\Display;
 
-use MaxBeckers\AmazonAlexa\Helper\PropertyHelper;
-use MaxBeckers\AmazonAlexa\Request\Request\AbstractRequest;
-use MaxBeckers\AmazonAlexa\Request\Request\Standard\StandardRequest;
+use Rboschin\AmazonAlexa\Helper\PropertyHelper;
+use Rboschin\AmazonAlexa\Request\Request\AbstractRequest;
+use Rboschin\AmazonAlexa\Request\Request\Standard\StandardRequest;
 
 class ElementSelectedRequest extends StandardRequest
 {

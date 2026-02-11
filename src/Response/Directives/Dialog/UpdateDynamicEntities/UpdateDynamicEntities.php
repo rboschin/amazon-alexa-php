@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Response\Directives\Dialog\UpdateDynamicEntities;
+namespace Rboschin\AmazonAlexa\Response\Directives\Dialog\UpdateDynamicEntities;
 
-use MaxBeckers\AmazonAlexa\Response\Directives\Directive;
+use Rboschin\AmazonAlexa\Response\Directives\Directive;
 
 abstract class UpdateDynamicEntities extends Directive
 {

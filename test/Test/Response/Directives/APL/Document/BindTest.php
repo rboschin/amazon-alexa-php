@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Test\Response\Directives\APL\Document;
+namespace Rboschin\AmazonAlexa\Test\Response\Directives\APL\Document;
 
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Document\Bind;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Document\BindType;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\StandardCommand\AbstractStandardCommand;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Document\Bind;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Document\BindType;
+use Rboschin\AmazonAlexa\Response\Directives\APL\StandardCommand\AbstractStandardCommand;
 use PHPUnit\Framework\TestCase;
 
 class BindTest extends TestCase

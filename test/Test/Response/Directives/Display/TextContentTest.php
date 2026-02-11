@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Test\Response\Directives\Display;
+namespace Rboschin\AmazonAlexa\Test\Response\Directives\Display;
 
 use ArrayObject;
-use MaxBeckers\AmazonAlexa\Response\Directives\Display\Text;
-use MaxBeckers\AmazonAlexa\Response\Directives\Display\TextContent;
+use Rboschin\AmazonAlexa\Response\Directives\Display\Text;
+use Rboschin\AmazonAlexa\Response\Directives\Display\TextContent;
 use PHPUnit\Framework\TestCase;
 
 class TextContentTest extends TestCase

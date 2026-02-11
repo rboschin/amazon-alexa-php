@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Helper;
+namespace Rboschin\AmazonAlexa\Helper;
 
 use GuzzleHttp\Client;
-use MaxBeckers\AmazonAlexa\Exception\DeviceApiCallException;
-use MaxBeckers\AmazonAlexa\Exception\MissingRequestDataException;
-use MaxBeckers\AmazonAlexa\Request\Device\DeviceAddressInformation;
-use MaxBeckers\AmazonAlexa\Request\Request;
+use Rboschin\AmazonAlexa\Exception\DeviceApiCallException;
+use Rboschin\AmazonAlexa\Exception\MissingRequestDataException;
+use Rboschin\AmazonAlexa\Request\Device\DeviceAddressInformation;
+use Rboschin\AmazonAlexa\Request\Request;
 
 /**
  * This helper class can call the amazon api to get address information.

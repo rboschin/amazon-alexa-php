@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Test\Response\Directives\APL\Component;
+namespace Rboschin\AmazonAlexa\Test\Response\Directives\APL\Component;
 
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Component\APLBaseComponent;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Component\ScrollViewComponent;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Document\APLComponentType;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\StandardCommand\AbstractStandardCommand;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Component\APLBaseComponent;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Component\ScrollViewComponent;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Document\APLComponentType;
+use Rboschin\AmazonAlexa\Response\Directives\APL\StandardCommand\AbstractStandardCommand;
 use PHPUnit\Framework\TestCase;
 
 class ScrollViewComponentTest extends TestCase
@@ -118,7 +118,7 @@ class ScrollViewComponentTest extends TestCase
     {
         $component = new ScrollViewComponent();
 
-        $this->assertInstanceOf(\MaxBeckers\AmazonAlexa\Response\Directives\APL\Component\ActionableComponent::class, $component);
+        $this->assertInstanceOf(\Rboschin\AmazonAlexa\Response\Directives\APL\Component\ActionableComponent::class, $component);
     }
 
     public function testImplementsJsonSerializable(): void

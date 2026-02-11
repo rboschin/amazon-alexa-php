@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Response\Directives\Display;
+namespace Rboschin\AmazonAlexa\Response\Directives\Display;
 
-use MaxBeckers\AmazonAlexa\Response\Directives\Directive;
+use Rboschin\AmazonAlexa\Response\Directives\Directive;
 
 class HintDirective extends Directive
 {

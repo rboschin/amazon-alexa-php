@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Response;
+namespace Rboschin\AmazonAlexa\Response;
 
-use MaxBeckers\AmazonAlexa\Exception\InvalidCardPermissionsException;
-use MaxBeckers\AmazonAlexa\Helper\SerializeValueMapper;
+use Rboschin\AmazonAlexa\Exception\InvalidCardPermissionsException;
+use Rboschin\AmazonAlexa\Helper\SerializeValueMapper;
 
 class Card implements \JsonSerializable
 {

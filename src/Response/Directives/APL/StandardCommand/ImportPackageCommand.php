@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Response\Directives\APL\StandardCommand;
+namespace Rboschin\AmazonAlexa\Response\Directives\APL\StandardCommand;
 
 class ImportPackageCommand extends AbstractStandardCommand
 {

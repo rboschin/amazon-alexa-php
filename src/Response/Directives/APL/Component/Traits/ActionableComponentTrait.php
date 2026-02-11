@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Response\Directives\APL\Component\Traits;
+namespace Rboschin\AmazonAlexa\Response\Directives\APL\Component\Traits;
 
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Document\KeyHandler;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\StandardCommand\AbstractStandardCommand;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Document\KeyHandler;
+use Rboschin\AmazonAlexa\Response\Directives\APL\StandardCommand\AbstractStandardCommand;
 
 trait ActionableComponentTrait
 {

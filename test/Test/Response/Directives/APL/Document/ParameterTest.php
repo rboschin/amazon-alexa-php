@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Test\Response\Directives\APL\Document;
+namespace Rboschin\AmazonAlexa\Test\Response\Directives\APL\Document;
 
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Document\Parameter;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Document\ParameterType;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Document\Parameter;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Document\ParameterType;
 use PHPUnit\Framework\TestCase;
 
 class ParameterTest extends TestCase

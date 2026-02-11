@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Response\Directives\Dialog\Entity;
+namespace Rboschin\AmazonAlexa\Response\Directives\Dialog\Entity;
 
 class TypeValue implements \JsonSerializable
 {

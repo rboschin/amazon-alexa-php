@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Test\Request;
+namespace Rboschin\AmazonAlexa\Test\Request;
 
-use MaxBeckers\AmazonAlexa\Request\Request;
-use MaxBeckers\AmazonAlexa\Request\Request\APL\LoadIndexListDataRequest;
-use MaxBeckers\AmazonAlexa\Request\Request\APL\LoadTokenListDataRequest;
-use MaxBeckers\AmazonAlexa\Request\Request\APL\RuntimeError;
-use MaxBeckers\AmazonAlexa\Request\Request\APL\RuntimeErrorRequest;
-use MaxBeckers\AmazonAlexa\Request\Request\APL\RuntimeErrorType;
-use MaxBeckers\AmazonAlexa\Request\Request\APL\UserEventRequest;
+use Rboschin\AmazonAlexa\Request\Request;
+use Rboschin\AmazonAlexa\Request\Request\APL\LoadIndexListDataRequest;
+use Rboschin\AmazonAlexa\Request\Request\APL\LoadTokenListDataRequest;
+use Rboschin\AmazonAlexa\Request\Request\APL\RuntimeError;
+use Rboschin\AmazonAlexa\Request\Request\APL\RuntimeErrorRequest;
+use Rboschin\AmazonAlexa\Request\Request\APL\RuntimeErrorType;
+use Rboschin\AmazonAlexa\Request\Request\APL\UserEventRequest;
 use PHPUnit\Framework\TestCase;
 
 class APLRequestsTest extends TestCase

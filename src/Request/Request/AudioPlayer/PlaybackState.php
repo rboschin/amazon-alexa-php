@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Request\Request\AudioPlayer;
+namespace Rboschin\AmazonAlexa\Request\Request\AudioPlayer;
 
-use MaxBeckers\AmazonAlexa\Helper\PropertyHelper;
+use Rboschin\AmazonAlexa\Helper\PropertyHelper;
 
 class PlaybackState
 {

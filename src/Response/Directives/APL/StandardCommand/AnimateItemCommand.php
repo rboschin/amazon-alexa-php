@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Response\Directives\APL\StandardCommand;
+namespace Rboschin\AmazonAlexa\Response\Directives\APL\StandardCommand;
 
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Document\RepeatMode;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Document\Value;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Document\RepeatMode;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Document\Value;
 
 class AnimateItemCommand extends AbstractStandardCommand
 {

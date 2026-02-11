@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Response\Directives\APL\AVGItem;
+namespace Rboschin\AmazonAlexa\Response\Directives\APL\AVGItem;
 
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Document\AVGItemType;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Document\AVGItemType;
 
 class Group extends AVGItem implements \JsonSerializable
 {

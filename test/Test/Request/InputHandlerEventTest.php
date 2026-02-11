@@ -2,23 +2,23 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Test\Request;
+namespace Rboschin\AmazonAlexa\Test\Request;
 
-use MaxBeckers\AmazonAlexa\Request\Request;
-use MaxBeckers\AmazonAlexa\Request\Request\GameEngine\Event\Event;
-use MaxBeckers\AmazonAlexa\Request\Request\GameEngine\Event\InputEvent;
-use MaxBeckers\AmazonAlexa\Request\Request\GameEngine\InputHandlerEvent;
+use Rboschin\AmazonAlexa\Request\Request;
+use Rboschin\AmazonAlexa\Request\Request\GameEngine\Event\Event;
+use Rboschin\AmazonAlexa\Request\Request\GameEngine\Event\InputEvent;
+use Rboschin\AmazonAlexa\Request\Request\GameEngine\InputHandlerEvent;
 use PHPUnit\Framework\TestCase;
 
 class InputHandlerEventTest extends TestCase
 {
     /**
-     * @throws \MaxBeckers\AmazonAlexa\Exception\MissingRequestDataException
-     * @throws \MaxBeckers\AmazonAlexa\Exception\MissingRequiredHeaderException
+     * @throws \Rboschin\AmazonAlexa\Exception\MissingRequestDataException
+     * @throws \Rboschin\AmazonAlexa\Exception\MissingRequiredHeaderException
      *
-     * @covers \MaxBeckers\AmazonAlexa\Request\Request\GameEngine\InputHandlerEvent::fromAmazonRequest
-     * @covers \MaxBeckers\AmazonAlexa\Request\Request\GameEngine\Event\Event::fromAmazonRequest
-     * @covers \MaxBeckers\AmazonAlexa\Request\Request\GameEngine\Event\InputEvent::fromAmazonRequest
+     * @covers \Rboschin\AmazonAlexa\Request\Request\GameEngine\InputHandlerEvent::fromAmazonRequest
+     * @covers \Rboschin\AmazonAlexa\Request\Request\GameEngine\Event\Event::fromAmazonRequest
+     * @covers \Rboschin\AmazonAlexa\Request\Request\GameEngine\Event\InputEvent::fromAmazonRequest
      */
     public function testIntentRequest(): void
     {

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Request\Request\System;
+namespace Rboschin\AmazonAlexa\Request\Request\System;
 
-use MaxBeckers\AmazonAlexa\Helper\PropertyHelper;
-use MaxBeckers\AmazonAlexa\Request\Request\AbstractRequest;
+use Rboschin\AmazonAlexa\Helper\PropertyHelper;
+use Rboschin\AmazonAlexa\Request\Request\AbstractRequest;
 
 class ConnectionsResponseRequest extends SystemRequest
 {

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Response\Directives\AudioPlayer;
+namespace Rboschin\AmazonAlexa\Response\Directives\AudioPlayer;
 
-use MaxBeckers\AmazonAlexa\Response\Directives\Directive;
+use Rboschin\AmazonAlexa\Response\Directives\Directive;
 
 class StopDirective extends Directive
 {

@@ -2,17 +2,21 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Helper;
+namespace Rboschin\AmazonAlexa\Helper;
 
-use MaxBeckers\AmazonAlexa\Response\Card;
-use MaxBeckers\AmazonAlexa\Response\Directives\Directive;
-use MaxBeckers\AmazonAlexa\Response\OutputSpeech;
-use MaxBeckers\AmazonAlexa\Response\Reprompt;
-use MaxBeckers\AmazonAlexa\Response\Response;
-use MaxBeckers\AmazonAlexa\Response\ResponseBody;
+use Rboschin\AmazonAlexa\Response\Card;
+use Rboschin\AmazonAlexa\Response\Directives\Directive;
+use Rboschin\AmazonAlexa\Response\OutputSpeech;
+use Rboschin\AmazonAlexa\Response\Reprompt;
+use Rboschin\AmazonAlexa\Response\Response;
+use Rboschin\AmazonAlexa\Response\ResponseBody;
+use Rboschin\AmazonAlexa\Response\ResponseBuilder;
 
 /**
  * This helper class can create simple responses for the most needed intents.
+ * 
+ * Note: This class now uses ResponseBuilder internally for better consistency,
+ * but maintains the same public API for backward compatibility.
  */
 class ResponseHelper
 {
@@ -34,10 +38,16 @@ class ResponseHelper
      */
     public function respond(string $text, bool $endSession = false): ?Response
     {
-        $outputSpeech = OutputSpeech::createByText($text);
-
-        $this->responseBody->outputSpeech = $outputSpeech;
-        $this->responseBody->shouldEndSession = $endSession;
+        $builder = ResponseBuilder::create()
+            ->text($text)
+            ->endSession($endSession);
+            
+        if (!empty($this->response->sessionAttributes)) {
+            $builder->sessionAttributes($this->response->sessionAttributes);
+        }
+        
+        $this->response = $builder->build();
+        $this->responseBody = $this->response->response;
 
         return $this->response;
     }
@@ -47,10 +57,16 @@ class ResponseHelper
      */
     public function respondSsml(string $ssml, bool $endSession = false): ?Response
     {
-        $outputSpeech = OutputSpeech::createBySsml($ssml);
-
-        $this->responseBody->outputSpeech = $outputSpeech;
-        $this->responseBody->shouldEndSession = $endSession;
+        $builder = ResponseBuilder::create()
+            ->ssml($ssml)
+            ->endSession($endSession);
+            
+        if (!empty($this->response->sessionAttributes)) {
+            $builder->sessionAttributes($this->response->sessionAttributes);
+        }
+        
+        $this->response = $builder->build();
+        $this->responseBody = $this->response->response;
 
         return $this->response;
     }
@@ -60,10 +76,40 @@ class ResponseHelper
      */
     public function reprompt(string $text): ?Response
     {
-        $outputSpeech = OutputSpeech::createByText($text);
-        $reprompt = new Reprompt($outputSpeech);
-
-        $this->responseBody->reprompt = $reprompt;
+        $builder = ResponseBuilder::create();
+        
+        // Preserve existing speech
+        if ($this->responseBody->outputSpeech) {
+            if ($this->responseBody->outputSpeech->type === OutputSpeech::TYPE_PLAINTEXT) {
+                $builder->text($this->responseBody->outputSpeech->text);
+            } else {
+                $builder->ssml($this->responseBody->outputSpeech->ssml);
+            }
+        }
+        
+        // Preserve existing card
+        if ($this->responseBody->card) {
+            $builder->card($this->responseBody->card);
+        }
+        
+        // Preserve existing directives
+        foreach ($this->responseBody->directives as $directive) {
+            $builder->directive($directive);
+        }
+        
+        // Preserve session end setting
+        $builder->endSession($this->responseBody->shouldEndSession ?? false);
+        
+        // Add reprompt
+        $builder->reprompt($text);
+        
+        // Preserve session attributes
+        if (!empty($this->response->sessionAttributes)) {
+            $builder->sessionAttributes($this->response->sessionAttributes);
+        }
+        
+        $this->response = $builder->build();
+        $this->responseBody = $this->response->response;
 
         return $this->response;
     }
@@ -73,10 +119,40 @@ class ResponseHelper
      */
     public function repromptSsml(string $ssml): ?Response
     {
-        $outputSpeech = OutputSpeech::createBySsml($ssml);
-        $reprompt = new Reprompt($outputSpeech);
-
-        $this->responseBody->reprompt = $reprompt;
+        $builder = ResponseBuilder::create();
+        
+        // Preserve existing speech
+        if ($this->responseBody->outputSpeech) {
+            if ($this->responseBody->outputSpeech->type === OutputSpeech::TYPE_PLAINTEXT) {
+                $builder->text($this->responseBody->outputSpeech->text);
+            } else {
+                $builder->ssml($this->responseBody->outputSpeech->ssml);
+            }
+        }
+        
+        // Preserve existing card
+        if ($this->responseBody->card) {
+            $builder->card($this->responseBody->card);
+        }
+        
+        // Preserve existing directives
+        foreach ($this->responseBody->directives as $directive) {
+            $builder->directive($directive);
+        }
+        
+        // Preserve session end setting
+        $builder->endSession($this->responseBody->shouldEndSession ?? false);
+        
+        // Add SSML reprompt
+        $builder->repromptSsml($ssml);
+        
+        // Preserve session attributes
+        if (!empty($this->response->sessionAttributes)) {
+            $builder->sessionAttributes($this->response->sessionAttributes);
+        }
+        
+        $this->response = $builder->build();
+        $this->responseBody = $this->response->response;
 
         return $this->response;
     }
@@ -86,7 +162,44 @@ class ResponseHelper
      */
     public function card(Card $card): ?Response
     {
-        $this->responseBody->card = $card;
+        $builder = ResponseBuilder::create();
+        
+        // Preserve existing speech
+        if ($this->responseBody->outputSpeech) {
+            if ($this->responseBody->outputSpeech->type === OutputSpeech::TYPE_PLAINTEXT) {
+                $builder->text($this->responseBody->outputSpeech->text);
+            } else {
+                $builder->ssml($this->responseBody->outputSpeech->ssml);
+            }
+        }
+        
+        // Preserve existing reprompt
+        if ($this->responseBody->reprompt) {
+            if ($this->responseBody->reprompt->outputSpeech->type === OutputSpeech::TYPE_PLAINTEXT) {
+                $builder->reprompt($this->responseBody->reprompt->outputSpeech->text);
+            } else {
+                $builder->repromptSsml($this->responseBody->reprompt->outputSpeech->ssml);
+            }
+        }
+        
+        // Preserve existing directives
+        foreach ($this->responseBody->directives as $directive) {
+            $builder->directive($directive);
+        }
+        
+        // Preserve session end setting
+        $builder->endSession($this->responseBody->shouldEndSession ?? false);
+        
+        // Add card
+        $builder->card($card);
+        
+        // Preserve session attributes
+        if (!empty($this->response->sessionAttributes)) {
+            $builder->sessionAttributes($this->response->sessionAttributes);
+        }
+        
+        $this->response = $builder->build();
+        $this->responseBody = $this->response->response;
 
         return $this->response;
     }
@@ -96,7 +209,49 @@ class ResponseHelper
      */
     public function directive(Directive $directive): ?Response
     {
-        $this->responseBody->addDirective($directive);
+        $builder = ResponseBuilder::create();
+        
+        // Preserve existing speech
+        if ($this->responseBody->outputSpeech) {
+            if ($this->responseBody->outputSpeech->type === OutputSpeech::TYPE_PLAINTEXT) {
+                $builder->text($this->responseBody->outputSpeech->text);
+            } else {
+                $builder->ssml($this->responseBody->outputSpeech->ssml);
+            }
+        }
+        
+        // Preserve existing reprompt
+        if ($this->responseBody->reprompt) {
+            if ($this->responseBody->reprompt->outputSpeech->type === OutputSpeech::TYPE_PLAINTEXT) {
+                $builder->reprompt($this->responseBody->reprompt->outputSpeech->text);
+            } else {
+                $builder->repromptSsml($this->responseBody->reprompt->outputSpeech->ssml);
+            }
+        }
+        
+        // Preserve existing card
+        if ($this->responseBody->card) {
+            $builder->card($this->responseBody->card);
+        }
+        
+        // Preserve existing directives
+        foreach ($this->responseBody->directives as $existingDirective) {
+            $builder->directive($existingDirective);
+        }
+        
+        // Preserve session end setting
+        $builder->endSession($this->responseBody->shouldEndSession ?? false);
+        
+        // Add new directive
+        $builder->directive($directive);
+        
+        // Preserve session attributes
+        if (!empty($this->response->sessionAttributes)) {
+            $builder->sessionAttributes($this->response->sessionAttributes);
+        }
+        
+        $this->response = $builder->build();
+        $this->responseBody = $this->response->response;
 
         return $this->response;
     }

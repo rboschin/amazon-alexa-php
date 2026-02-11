@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Response\Directives\Dialog\UpdateDynamicEntities;
+namespace Rboschin\AmazonAlexa\Response\Directives\Dialog\UpdateDynamicEntities;
 
-use MaxBeckers\AmazonAlexa\Response\Directives\Dialog\Entity\Type;
+use Rboschin\AmazonAlexa\Response\Directives\Dialog\Entity\Type;
 
 class Replace extends UpdateDynamicEntities
 {

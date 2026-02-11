@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Test\Response\Directives;
+namespace Rboschin\AmazonAlexa\Test\Response\Directives;
 
-use MaxBeckers\AmazonAlexa\Response\Directives\GameEngine\Event;
-use MaxBeckers\AmazonAlexa\Response\Directives\GameEngine\Pattern;
-use MaxBeckers\AmazonAlexa\Response\Directives\GameEngine\RecognizerDeviation;
-use MaxBeckers\AmazonAlexa\Response\Directives\GameEngine\RecognizerMatch;
-use MaxBeckers\AmazonAlexa\Response\Directives\GameEngine\RecognizerProgress;
-use MaxBeckers\AmazonAlexa\Response\Directives\GameEngine\StartInputHandlerDirective;
-use MaxBeckers\AmazonAlexa\Response\Directives\GameEngine\StopInputHandlerDirective;
+use Rboschin\AmazonAlexa\Response\Directives\GameEngine\Event;
+use Rboschin\AmazonAlexa\Response\Directives\GameEngine\Pattern;
+use Rboschin\AmazonAlexa\Response\Directives\GameEngine\RecognizerDeviation;
+use Rboschin\AmazonAlexa\Response\Directives\GameEngine\RecognizerMatch;
+use Rboschin\AmazonAlexa\Response\Directives\GameEngine\RecognizerProgress;
+use Rboschin\AmazonAlexa\Response\Directives\GameEngine\StartInputHandlerDirective;
+use Rboschin\AmazonAlexa\Response\Directives\GameEngine\StopInputHandlerDirective;
 use PHPUnit\Framework\TestCase;
 
 class GameEngineTest extends TestCase

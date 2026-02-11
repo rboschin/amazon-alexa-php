@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Response\Directives\APL\Component;
+namespace Rboschin\AmazonAlexa\Response\Directives\APL\Component;
 
 class Entity implements \JsonSerializable
 {

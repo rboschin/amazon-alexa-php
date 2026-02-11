@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Test\Response;
+namespace Rboschin\AmazonAlexa\Test\Response;
 
-use MaxBeckers\AmazonAlexa\Helper\ResponseHelper;
-use MaxBeckers\AmazonAlexa\Response\Card;
-use MaxBeckers\AmazonAlexa\Response\Directives\Display\RenderTemplateDirective;
-use MaxBeckers\AmazonAlexa\Response\OutputSpeech;
+use Rboschin\AmazonAlexa\Helper\ResponseHelper;
+use Rboschin\AmazonAlexa\Response\Card;
+use Rboschin\AmazonAlexa\Response\Directives\Display\RenderTemplateDirective;
+use Rboschin\AmazonAlexa\Response\OutputSpeech;
 use PHPUnit\Framework\TestCase;
 
 class ResponseHelperTest extends TestCase

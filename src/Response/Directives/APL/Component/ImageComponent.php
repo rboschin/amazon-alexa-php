@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Response\Directives\APL\Component;
+namespace Rboschin\AmazonAlexa\Response\Directives\APL\Component;
 
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Document\APLComponentType;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Document\ImageAlign;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Document\Scale;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\StandardCommand\AbstractStandardCommand;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Document\APLComponentType;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Document\ImageAlign;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Document\Scale;
+use Rboschin\AmazonAlexa\Response\Directives\APL\StandardCommand\AbstractStandardCommand;
 
 class ImageComponent extends APLBaseComponent implements \JsonSerializable
 {

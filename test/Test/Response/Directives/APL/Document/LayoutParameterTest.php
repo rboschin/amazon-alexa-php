@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Test\Response\Directives\APL\Document;
+namespace Rboschin\AmazonAlexa\Test\Response\Directives\APL\Document;
 
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Document\LayoutParameter;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Document\LayoutParameterType;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Document\LayoutParameter;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Document\LayoutParameterType;
 use PHPUnit\Framework\TestCase;
 
 class LayoutParameterTest extends TestCase

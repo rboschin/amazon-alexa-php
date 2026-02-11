@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Test\Response\Directives\Dialog;
+namespace Rboschin\AmazonAlexa\Test\Response\Directives\Dialog;
 
-use MaxBeckers\AmazonAlexa\Intent\Intent;
-use MaxBeckers\AmazonAlexa\Response\Directives\Dialog\ElicitSlotDirective;
+use Rboschin\AmazonAlexa\Intent\Intent;
+use Rboschin\AmazonAlexa\Response\Directives\Dialog\ElicitSlotDirective;
 use PHPUnit\Framework\TestCase;
 
 class ElicitSlotDirectiveTest extends TestCase

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Response;
+namespace Rboschin\AmazonAlexa\Response;
 
-use MaxBeckers\AmazonAlexa\Helper\SerializeValueMapper;
-use MaxBeckers\AmazonAlexa\Response\Directives\Directive;
+use Rboschin\AmazonAlexa\Helper\SerializeValueMapper;
+use Rboschin\AmazonAlexa\Response\Directives\Directive;
 
 class ResponseBody implements ResponseBodyInterface, \JsonSerializable
 {

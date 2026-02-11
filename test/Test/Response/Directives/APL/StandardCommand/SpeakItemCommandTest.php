@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Test\Response\Directives\APL\StandardCommand;
+namespace Rboschin\AmazonAlexa\Test\Response\Directives\APL\StandardCommand;
 
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Document\HighlightMode;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Document\ScrollAlign;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\StandardCommand\SpeakItemCommand;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Document\HighlightMode;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Document\ScrollAlign;
+use Rboschin\AmazonAlexa\Response\Directives\APL\StandardCommand\SpeakItemCommand;
 use PHPUnit\Framework\TestCase;
 
 class SpeakItemCommandTest extends TestCase

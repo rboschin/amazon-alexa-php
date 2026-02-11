@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Response\Directives\GameEngine;
+namespace Rboschin\AmazonAlexa\Response\Directives\GameEngine;
 
-use MaxBeckers\AmazonAlexa\Response\Directives\Directive;
+use Rboschin\AmazonAlexa\Response\Directives\Directive;
 
 class StartInputHandlerDirective extends Directive
 {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Response\Directives\Display;
+namespace Rboschin\AmazonAlexa\Response\Directives\Display;
 
 class Text
 {

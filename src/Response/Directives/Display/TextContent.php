@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Response\Directives\Display;
+namespace Rboschin\AmazonAlexa\Response\Directives\Display;
 
-use MaxBeckers\AmazonAlexa\Helper\SerializeValueMapper;
+use Rboschin\AmazonAlexa\Helper\SerializeValueMapper;
 
 class TextContent implements \JsonSerializable
 {

@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Test\RequestHandler;
+namespace Rboschin\AmazonAlexa\Test\RequestHandler;
 
-use MaxBeckers\AmazonAlexa\Exception\MissingRequestHandlerException;
-use MaxBeckers\AmazonAlexa\Helper\ResponseHelper;
-use MaxBeckers\AmazonAlexa\Request\Application;
-use MaxBeckers\AmazonAlexa\Request\Context;
-use MaxBeckers\AmazonAlexa\Request\Request;
-use MaxBeckers\AmazonAlexa\Request\Request\Standard\IntentRequest;
-use MaxBeckers\AmazonAlexa\Request\Session;
-use MaxBeckers\AmazonAlexa\Request\System;
-use MaxBeckers\AmazonAlexa\RequestHandler\AbstractRequestHandler;
-use MaxBeckers\AmazonAlexa\RequestHandler\RequestHandlerRegistry;
-use MaxBeckers\AmazonAlexa\Response\Response;
+use Rboschin\AmazonAlexa\Exception\MissingRequestHandlerException;
+use Rboschin\AmazonAlexa\Helper\ResponseHelper;
+use Rboschin\AmazonAlexa\Request\Application;
+use Rboschin\AmazonAlexa\Request\Context;
+use Rboschin\AmazonAlexa\Request\Request;
+use Rboschin\AmazonAlexa\Request\Request\Standard\IntentRequest;
+use Rboschin\AmazonAlexa\Request\Session;
+use Rboschin\AmazonAlexa\Request\System;
+use Rboschin\AmazonAlexa\RequestHandler\AbstractRequestHandler;
+use Rboschin\AmazonAlexa\RequestHandler\RequestHandlerRegistry;
+use Rboschin\AmazonAlexa\Response\Response;
 use PHPUnit\Framework\TestCase;
 
 class RequestHandlerRegistryTest extends TestCase

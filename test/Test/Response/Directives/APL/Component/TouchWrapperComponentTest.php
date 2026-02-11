@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Test\Response\Directives\APL\Component;
+namespace Rboschin\AmazonAlexa\Test\Response\Directives\APL\Component;
 
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Component\APLBaseComponent;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Component\TouchableComponent;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Component\TouchWrapperComponent;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Document\APLComponentType;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\StandardCommand\AbstractStandardCommand;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Component\APLBaseComponent;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Component\TouchableComponent;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Component\TouchWrapperComponent;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Document\APLComponentType;
+use Rboschin\AmazonAlexa\Response\Directives\APL\StandardCommand\AbstractStandardCommand;
 use PHPUnit\Framework\TestCase;
 
 class TouchWrapperComponentTest extends TestCase

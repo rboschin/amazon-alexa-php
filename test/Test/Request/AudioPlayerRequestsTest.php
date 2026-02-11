@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Test\Request;
+namespace Rboschin\AmazonAlexa\Test\Request;
 
-use MaxBeckers\AmazonAlexa\Request\Request;
-use MaxBeckers\AmazonAlexa\Request\Request\AudioPlayer\PlaybackFailedRequest;
-use MaxBeckers\AmazonAlexa\Request\Request\AudioPlayer\PlaybackFinishedRequest;
-use MaxBeckers\AmazonAlexa\Request\Request\AudioPlayer\PlaybackNearlyFinishedRequest;
-use MaxBeckers\AmazonAlexa\Request\Request\AudioPlayer\PlaybackStartedRequest;
-use MaxBeckers\AmazonAlexa\Request\Request\AudioPlayer\PlaybackStoppedRequest;
+use Rboschin\AmazonAlexa\Request\Request;
+use Rboschin\AmazonAlexa\Request\Request\AudioPlayer\PlaybackFailedRequest;
+use Rboschin\AmazonAlexa\Request\Request\AudioPlayer\PlaybackFinishedRequest;
+use Rboschin\AmazonAlexa\Request\Request\AudioPlayer\PlaybackNearlyFinishedRequest;
+use Rboschin\AmazonAlexa\Request\Request\AudioPlayer\PlaybackStartedRequest;
+use Rboschin\AmazonAlexa\Request\Request\AudioPlayer\PlaybackStoppedRequest;
 use PHPUnit\Framework\TestCase;
 
 class AudioPlayerRequestsTest extends TestCase

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Request\Request\APL;
+namespace Rboschin\AmazonAlexa\Request\Request\APL;
 
 enum RuntimeErrorType: string
 {

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Test\Response\Directives\APL\Gesture;
+namespace Rboschin\AmazonAlexa\Test\Response\Directives\APL\Gesture;
 
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Document\GestureType;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Gesture\DoublePress;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\StandardCommand\AbstractStandardCommand;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Document\GestureType;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Gesture\DoublePress;
+use Rboschin\AmazonAlexa\Response\Directives\APL\StandardCommand\AbstractStandardCommand;
 use PHPUnit\Framework\TestCase;
 
 class DoublePressTest extends TestCase

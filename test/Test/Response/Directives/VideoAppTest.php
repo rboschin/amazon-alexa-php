@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Test\Response\Directives;
+namespace Rboschin\AmazonAlexa\Test\Response\Directives;
 
-use MaxBeckers\AmazonAlexa\Response\Directives\VideoApp\Metadata;
-use MaxBeckers\AmazonAlexa\Response\Directives\VideoApp\VideoItem;
-use MaxBeckers\AmazonAlexa\Response\Directives\VideoApp\VideoLaunchDirective;
+use Rboschin\AmazonAlexa\Response\Directives\VideoApp\Metadata;
+use Rboschin\AmazonAlexa\Response\Directives\VideoApp\VideoItem;
+use Rboschin\AmazonAlexa\Response\Directives\VideoApp\VideoLaunchDirective;
 use PHPUnit\Framework\TestCase;
 
 class VideoAppTest extends TestCase

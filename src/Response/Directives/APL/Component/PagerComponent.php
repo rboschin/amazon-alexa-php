@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Response\Directives\APL\Component;
+namespace Rboschin\AmazonAlexa\Response\Directives\APL\Component;
 
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Component\Traits\ActionableComponentTrait;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Component\Traits\MultiChildComponentTrait;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Document\APLComponentType;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Document\Navigation;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Document\PageDirection;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\StandardCommand\AbstractStandardCommand;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Component\Traits\ActionableComponentTrait;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Component\Traits\MultiChildComponentTrait;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Document\APLComponentType;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Document\Navigation;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Document\PageDirection;
+use Rboschin\AmazonAlexa\Response\Directives\APL\StandardCommand\AbstractStandardCommand;
 
 class PagerComponent extends APLBaseComponent implements \JsonSerializable
 {

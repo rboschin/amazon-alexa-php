@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Test\Helper;
+namespace Rboschin\AmazonAlexa\Test\Helper;
 
-use MaxBeckers\AmazonAlexa\Helper\PropertyHelper;
+use Rboschin\AmazonAlexa\Helper\PropertyHelper;
 use PHPUnit\Framework\TestCase;
 
 class PropertyHelperTest extends TestCase

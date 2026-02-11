@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Response\Directives\GameEngine;
+namespace Rboschin\AmazonAlexa\Response\Directives\GameEngine;
 
 class Pattern
 {

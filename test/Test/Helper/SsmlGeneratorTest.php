@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Test\Helper;
+namespace Rboschin\AmazonAlexa\Test\Helper;
 
-use MaxBeckers\AmazonAlexa\Exception\InvalidSsmlException;
-use MaxBeckers\AmazonAlexa\Helper\SsmlGenerator;
+use Rboschin\AmazonAlexa\Exception\InvalidSsmlException;
+use Rboschin\AmazonAlexa\Helper\SsmlGenerator;
 use PHPUnit\Framework\TestCase;
 
 class SsmlGeneratorTest extends TestCase

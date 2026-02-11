@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Test\Request;
+namespace Rboschin\AmazonAlexa\Test\Request;
 
-use MaxBeckers\AmazonAlexa\Request\AudioTrack;
-use MaxBeckers\AmazonAlexa\Request\MediaState;
-use MaxBeckers\AmazonAlexa\Request\MediaTag;
+use Rboschin\AmazonAlexa\Request\AudioTrack;
+use Rboschin\AmazonAlexa\Request\MediaState;
+use Rboschin\AmazonAlexa\Request\MediaTag;
 use PHPUnit\Framework\TestCase;
 
 class MediaTagTest extends TestCase

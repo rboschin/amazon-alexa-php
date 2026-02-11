@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Test\Response\Directives\Dialog\UpdateDynamicEntities;
+namespace Rboschin\AmazonAlexa\Test\Response\Directives\Dialog\UpdateDynamicEntities;
 
-use MaxBeckers\AmazonAlexa\Response\Directives\Dialog\UpdateDynamicEntities\Clear;
+use Rboschin\AmazonAlexa\Response\Directives\Dialog\UpdateDynamicEntities\Clear;
 use PHPUnit\Framework\TestCase;
 
 class ClearTest extends TestCase

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Helper;
+namespace Rboschin\AmazonAlexa\Helper;
 
 /**
  * This helper class simplifies the property handling.

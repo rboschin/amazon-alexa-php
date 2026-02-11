@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Response;
+namespace Rboschin\AmazonAlexa\Response;
 
 class Reprompt
 {

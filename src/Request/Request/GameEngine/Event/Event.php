@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Request\Request\GameEngine\Event;
+namespace Rboschin\AmazonAlexa\Request\Request\GameEngine\Event;
 
 class Event
 {

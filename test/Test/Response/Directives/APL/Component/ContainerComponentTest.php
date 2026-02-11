@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Test\Response\Directives\APL\Component;
+namespace Rboschin\AmazonAlexa\Test\Response\Directives\APL\Component;
 
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Component\ContainerComponent;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Document\AlignItems;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Document\APLComponentType;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Document\Direction;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Document\JustifyContent;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Document\Wrap;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Component\ContainerComponent;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Document\AlignItems;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Document\APLComponentType;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Document\Direction;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Document\JustifyContent;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Document\Wrap;
 use PHPUnit\Framework\TestCase;
 
 class ContainerComponentTest extends TestCase
@@ -97,7 +97,7 @@ class ContainerComponentTest extends TestCase
     {
         $component = new ContainerComponent();
 
-        $this->assertInstanceOf(\MaxBeckers\AmazonAlexa\Response\Directives\APL\Component\MultiChildComponent::class, $component);
+        $this->assertInstanceOf(\Rboschin\AmazonAlexa\Response\Directives\APL\Component\MultiChildComponent::class, $component);
     }
 
     public function testImplementsJsonSerializable(): void

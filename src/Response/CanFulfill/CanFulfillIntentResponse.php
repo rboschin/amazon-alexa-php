@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Response\CanFulfill;
+namespace Rboschin\AmazonAlexa\Response\CanFulfill;
 
 class CanFulfillIntentResponse
 {

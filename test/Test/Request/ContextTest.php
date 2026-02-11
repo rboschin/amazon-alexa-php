@@ -2,23 +2,23 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Test\Request;
+namespace Rboschin\AmazonAlexa\Test\Request;
 
-use MaxBeckers\AmazonAlexa\Request\Advertising;
-use MaxBeckers\AmazonAlexa\Request\AlexaPresentationAPL;
-use MaxBeckers\AmazonAlexa\Request\ComponentVisibleOnScreen;
-use MaxBeckers\AmazonAlexa\Request\Context;
-use MaxBeckers\AmazonAlexa\Request\Entity;
-use MaxBeckers\AmazonAlexa\Request\Experience;
-use MaxBeckers\AmazonAlexa\Request\KeyboardType;
-use MaxBeckers\AmazonAlexa\Request\Request;
-use MaxBeckers\AmazonAlexa\Request\Request\Standard\LaunchRequest;
-use MaxBeckers\AmazonAlexa\Request\TouchType;
-use MaxBeckers\AmazonAlexa\Request\Video;
-use MaxBeckers\AmazonAlexa\Request\Viewport;
-use MaxBeckers\AmazonAlexa\Request\ViewportMode;
-use MaxBeckers\AmazonAlexa\Request\ViewportShape;
-use MaxBeckers\AmazonAlexa\Request\ViewportTag;
+use Rboschin\AmazonAlexa\Request\Advertising;
+use Rboschin\AmazonAlexa\Request\AlexaPresentationAPL;
+use Rboschin\AmazonAlexa\Request\ComponentVisibleOnScreen;
+use Rboschin\AmazonAlexa\Request\Context;
+use Rboschin\AmazonAlexa\Request\Entity;
+use Rboschin\AmazonAlexa\Request\Experience;
+use Rboschin\AmazonAlexa\Request\KeyboardType;
+use Rboschin\AmazonAlexa\Request\Request;
+use Rboschin\AmazonAlexa\Request\Request\Standard\LaunchRequest;
+use Rboschin\AmazonAlexa\Request\TouchType;
+use Rboschin\AmazonAlexa\Request\Video;
+use Rboschin\AmazonAlexa\Request\Viewport;
+use Rboschin\AmazonAlexa\Request\ViewportMode;
+use Rboschin\AmazonAlexa\Request\ViewportShape;
+use Rboschin\AmazonAlexa\Request\ViewportTag;
 use PHPUnit\Framework\TestCase;
 
 class ContextTest extends TestCase

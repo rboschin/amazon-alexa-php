@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Request\Request\AlexaSkillEvent;
+namespace Rboschin\AmazonAlexa\Request\Request\AlexaSkillEvent;
 
 class SkillPermissionBody
 {

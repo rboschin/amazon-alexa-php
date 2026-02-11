@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Request;
+namespace Rboschin\AmazonAlexa\Request;
 
-use MaxBeckers\AmazonAlexa\Helper\PropertyHelper;
+use Rboschin\AmazonAlexa\Helper\PropertyHelper;
 
 class Session
 {

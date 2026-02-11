@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Test\Request;
+namespace Rboschin\AmazonAlexa\Test\Request;
 
-use MaxBeckers\AmazonAlexa\Request\ScrollableTag;
-use MaxBeckers\AmazonAlexa\Request\ScrollDirection;
+use Rboschin\AmazonAlexa\Request\ScrollableTag;
+use Rboschin\AmazonAlexa\Request\ScrollDirection;
 use PHPUnit\Framework\TestCase;
 
 class ScrollableTagTest extends TestCase

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Test\Response\Directives\APL\Document;
+namespace Rboschin\AmazonAlexa\Test\Response\Directives\APL\Document;
 
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Component\APLBaseComponent;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Document\MainTemplate;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Component\APLBaseComponent;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Document\MainTemplate;
 use PHPUnit\Framework\TestCase;
 
 class MainTemplateTest extends TestCase

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Response\Directives\APL;
+namespace Rboschin\AmazonAlexa\Response\Directives\APL;
 
-use MaxBeckers\AmazonAlexa\Response\Directives\Directive;
+use Rboschin\AmazonAlexa\Response\Directives\Directive;
 
 class SendTokenListDataDirective extends Directive implements \JsonSerializable
 {

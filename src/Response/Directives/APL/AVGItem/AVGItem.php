@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Response\Directives\APL\AVGItem;
+namespace Rboschin\AmazonAlexa\Response\Directives\APL\AVGItem;
 
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\AVGFilter\AVGFilter;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Document\AVGItemType;
+use Rboschin\AmazonAlexa\Response\Directives\APL\AVGFilter\AVGFilter;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Document\AVGItemType;
 
 abstract class AVGItem implements \JsonSerializable
 {

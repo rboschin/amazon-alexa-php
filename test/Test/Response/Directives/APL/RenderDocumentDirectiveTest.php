@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Test\Response\Directives\APL;
+namespace Rboschin\AmazonAlexa\Test\Response\Directives\APL;
 
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Document\APLDocument;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Document\MainTemplate;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\RenderDocumentDirective;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Document\APLDocument;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Document\MainTemplate;
+use Rboschin\AmazonAlexa\Response\Directives\APL\RenderDocumentDirective;
 use PHPUnit\Framework\TestCase;
 
 class RenderDocumentDirectiveTest extends TestCase

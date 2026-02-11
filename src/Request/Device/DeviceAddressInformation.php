@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Request\Device;
+namespace Rboschin\AmazonAlexa\Request\Device;
 
-use MaxBeckers\AmazonAlexa\Helper\PropertyHelper;
+use Rboschin\AmazonAlexa\Helper\PropertyHelper;
 
 class DeviceAddressInformation
 {

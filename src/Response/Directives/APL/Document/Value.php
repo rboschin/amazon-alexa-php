@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Response\Directives\APL\Document;
+namespace Rboschin\AmazonAlexa\Response\Directives\APL\Document;
 
 class Value implements \JsonSerializable
 {

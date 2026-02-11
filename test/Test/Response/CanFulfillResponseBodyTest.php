@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Test\Response;
+namespace Rboschin\AmazonAlexa\Test\Response;
 
-use MaxBeckers\AmazonAlexa\Response\CanFulfill\CanFulfillIntentResponse;
-use MaxBeckers\AmazonAlexa\Response\CanFulfill\CanFulfillResponseBody;
-use MaxBeckers\AmazonAlexa\Response\CanFulfill\CanFulfillSlot;
+use Rboschin\AmazonAlexa\Response\CanFulfill\CanFulfillIntentResponse;
+use Rboschin\AmazonAlexa\Response\CanFulfill\CanFulfillResponseBody;
+use Rboschin\AmazonAlexa\Response\CanFulfill\CanFulfillSlot;
 use PHPUnit\Framework\TestCase;
 
 class CanFulfillResponseBodyTest extends TestCase

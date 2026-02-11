@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Response\Directives\System;
+namespace Rboschin\AmazonAlexa\Response\Directives\System;
 
 class Error
 {

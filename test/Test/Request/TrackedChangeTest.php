@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Test\Request;
+namespace Rboschin\AmazonAlexa\Test\Request;
 
-use MaxBeckers\AmazonAlexa\Request\MediaState;
-use MaxBeckers\AmazonAlexa\Request\TrackedChange;
+use Rboschin\AmazonAlexa\Request\MediaState;
+use Rboschin\AmazonAlexa\Request\TrackedChange;
 use PHPUnit\Framework\TestCase;
 
 class TrackedChangeTest extends TestCase

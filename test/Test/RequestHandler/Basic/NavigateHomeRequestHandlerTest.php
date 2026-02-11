@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Test\RequestHandler\Basic;
+namespace Rboschin\AmazonAlexa\Test\RequestHandler\Basic;
 
-use MaxBeckers\AmazonAlexa\Helper\ResponseHelper;
-use MaxBeckers\AmazonAlexa\Request\Request;
-use MaxBeckers\AmazonAlexa\RequestHandler\Basic\NavigateHomeRequestHandler;
-use MaxBeckers\AmazonAlexa\Response\Response;
-use MaxBeckers\AmazonAlexa\Response\ResponseBody;
+use Rboschin\AmazonAlexa\Helper\ResponseHelper;
+use Rboschin\AmazonAlexa\Request\Request;
+use Rboschin\AmazonAlexa\RequestHandler\Basic\NavigateHomeRequestHandler;
+use Rboschin\AmazonAlexa\Response\Response;
+use Rboschin\AmazonAlexa\Response\ResponseBody;
 use PHPUnit\Framework\TestCase;
 
 class NavigateHomeRequestHandlerTest extends TestCase

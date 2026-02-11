@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Test\Response\Directives\APL\Document;
+namespace Rboschin\AmazonAlexa\Test\Response\Directives\APL\Document;
 
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Document\PseudoLocalization;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Document\Settings;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Document\PseudoLocalization;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Document\Settings;
 use PHPUnit\Framework\TestCase;
 
 class SettingsTest extends TestCase

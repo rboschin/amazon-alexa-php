@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Response\Directives\Dialog;
+namespace Rboschin\AmazonAlexa\Response\Directives\Dialog;
 
-use MaxBeckers\AmazonAlexa\Intent\Intent;
-use MaxBeckers\AmazonAlexa\Response\Directives\Directive;
+use Rboschin\AmazonAlexa\Intent\Intent;
+use Rboschin\AmazonAlexa\Response\Directives\Directive;
 
 class DelegateDirective extends Directive
 {

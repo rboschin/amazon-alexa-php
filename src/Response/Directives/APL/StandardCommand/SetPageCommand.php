@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Response\Directives\APL\StandardCommand;
+namespace Rboschin\AmazonAlexa\Response\Directives\APL\StandardCommand;
 
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Document\SetPagePosition;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Document\SetPagePosition;
 
 class SetPageCommand extends AbstractStandardCommand implements \JsonSerializable
 {

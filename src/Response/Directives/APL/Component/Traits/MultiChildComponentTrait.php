@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Response\Directives\APL\Component\Traits;
+namespace Rboschin\AmazonAlexa\Response\Directives\APL\Component\Traits;
 
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\Component\APLBaseComponent;
+use Rboschin\AmazonAlexa\Response\Directives\APL\Component\APLBaseComponent;
 
 trait MultiChildComponentTrait
 {

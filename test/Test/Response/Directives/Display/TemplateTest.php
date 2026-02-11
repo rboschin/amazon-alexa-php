@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Test\Response\Directives\Display;
+namespace Rboschin\AmazonAlexa\Test\Response\Directives\Display;
 
 use ArrayObject;
-use MaxBeckers\AmazonAlexa\Response\Directives\Display\Image;
-use MaxBeckers\AmazonAlexa\Response\Directives\Display\ListItem;
-use MaxBeckers\AmazonAlexa\Response\Directives\Display\Template;
-use MaxBeckers\AmazonAlexa\Response\Directives\Display\TextContent;
+use Rboschin\AmazonAlexa\Response\Directives\Display\Image;
+use Rboschin\AmazonAlexa\Response\Directives\Display\ListItem;
+use Rboschin\AmazonAlexa\Response\Directives\Display\Template;
+use Rboschin\AmazonAlexa\Response\Directives\Display\TextContent;
 use PHPUnit\Framework\TestCase;
 
 class TemplateTest extends TestCase

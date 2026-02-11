@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\RequestHandler;
+namespace Rboschin\AmazonAlexa\RequestHandler;
 
-use MaxBeckers\AmazonAlexa\Exception\MissingRequestHandlerException;
-use MaxBeckers\AmazonAlexa\Request\Request;
+use Rboschin\AmazonAlexa\Exception\MissingRequestHandlerException;
+use Rboschin\AmazonAlexa\Request\Request;
 
 class RequestHandlerRegistry
 {

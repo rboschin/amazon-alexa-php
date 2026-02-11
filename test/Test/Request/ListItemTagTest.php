@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Test\Request;
+namespace Rboschin\AmazonAlexa\Test\Request;
 
-use MaxBeckers\AmazonAlexa\Request\ListItemTag;
+use Rboschin\AmazonAlexa\Request\ListItemTag;
 use PHPUnit\Framework\TestCase;
 
 class ListItemTagTest extends TestCase

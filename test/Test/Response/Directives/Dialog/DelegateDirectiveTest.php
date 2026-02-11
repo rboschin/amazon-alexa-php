@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Test\Response\Directives\Dialog;
+namespace Rboschin\AmazonAlexa\Test\Response\Directives\Dialog;
 
-use MaxBeckers\AmazonAlexa\Intent\Intent;
-use MaxBeckers\AmazonAlexa\Response\Directives\Dialog\DelegateDirective;
+use Rboschin\AmazonAlexa\Intent\Intent;
+use Rboschin\AmazonAlexa\Response\Directives\Dialog\DelegateDirective;
 use PHPUnit\Framework\TestCase;
 
 class DelegateDirectiveTest extends TestCase

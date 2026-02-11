@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Response\CanFulfill;
+namespace Rboschin\AmazonAlexa\Response\CanFulfill;
 
-use MaxBeckers\AmazonAlexa\Response\ResponseBodyInterface;
+use Rboschin\AmazonAlexa\Response\ResponseBodyInterface;
 
 class CanFulfillResponseBody implements ResponseBodyInterface
 {

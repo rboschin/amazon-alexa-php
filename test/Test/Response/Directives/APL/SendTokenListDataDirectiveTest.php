@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Test\Response\Directives\APL;
+namespace Rboschin\AmazonAlexa\Test\Response\Directives\APL;
 
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\SendTokenListDataDirective;
+use Rboschin\AmazonAlexa\Response\Directives\APL\SendTokenListDataDirective;
 use PHPUnit\Framework\TestCase;
 
 class SendTokenListDataDirectiveTest extends TestCase

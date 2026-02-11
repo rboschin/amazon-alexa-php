@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Test\Response\Directives\APL\StandardCommand;
+namespace Rboschin\AmazonAlexa\Test\Response\Directives\APL\StandardCommand;
 
-use MaxBeckers\AmazonAlexa\Request\AudioTrack;
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\StandardCommand\PlayMediaCommand;
+use Rboschin\AmazonAlexa\Request\AudioTrack;
+use Rboschin\AmazonAlexa\Response\Directives\APL\StandardCommand\PlayMediaCommand;
 use PHPUnit\Framework\TestCase;
 
 class PlayMediaCommandTest extends TestCase

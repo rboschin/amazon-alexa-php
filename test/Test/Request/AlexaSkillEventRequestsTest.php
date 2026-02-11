@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Test\Request;
+namespace Rboschin\AmazonAlexa\Test\Request;
 
-use MaxBeckers\AmazonAlexa\Request\Request;
-use MaxBeckers\AmazonAlexa\Request\Request\AlexaSkillEvent\SkillAccountLinkedRequest;
-use MaxBeckers\AmazonAlexa\Request\Request\AlexaSkillEvent\SkillDisabledBody;
-use MaxBeckers\AmazonAlexa\Request\Request\AlexaSkillEvent\SkillDisabledRequest;
-use MaxBeckers\AmazonAlexa\Request\Request\AlexaSkillEvent\SkillEnabledRequest;
-use MaxBeckers\AmazonAlexa\Request\Request\AlexaSkillEvent\SkillPermissionAcceptedRequest;
-use MaxBeckers\AmazonAlexa\Request\Request\AlexaSkillEvent\SkillPermissionChangedRequest;
+use Rboschin\AmazonAlexa\Request\Request;
+use Rboschin\AmazonAlexa\Request\Request\AlexaSkillEvent\SkillAccountLinkedRequest;
+use Rboschin\AmazonAlexa\Request\Request\AlexaSkillEvent\SkillDisabledBody;
+use Rboschin\AmazonAlexa\Request\Request\AlexaSkillEvent\SkillDisabledRequest;
+use Rboschin\AmazonAlexa\Request\Request\AlexaSkillEvent\SkillEnabledRequest;
+use Rboschin\AmazonAlexa\Request\Request\AlexaSkillEvent\SkillPermissionAcceptedRequest;
+use Rboschin\AmazonAlexa\Request\Request\AlexaSkillEvent\SkillPermissionChangedRequest;
 use PHPUnit\Framework\TestCase;
 
 class AlexaSkillEventRequestsTest extends TestCase

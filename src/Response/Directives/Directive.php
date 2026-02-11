@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\Response\Directives;
+namespace Rboschin\AmazonAlexa\Response\Directives;
 
 abstract class Directive
 {

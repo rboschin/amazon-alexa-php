@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace MaxBeckers\AmazonAlexa\RequestHandler;
+namespace Rboschin\AmazonAlexa\RequestHandler;
 
-use MaxBeckers\AmazonAlexa\Request\Request;
-use MaxBeckers\AmazonAlexa\Response\Response;
+use Rboschin\AmazonAlexa\Request\Request;
+use Rboschin\AmazonAlexa\Response\Response;
 
 abstract class AbstractRequestHandler
 {
