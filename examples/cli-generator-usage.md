@@ -22,9 +22,9 @@ declare(strict_types=1);
 
 namespace App\Handlers;
 
-use MaxBeckers\AmazonAlexa\RequestHandler\AbstractRequestHandler;
-use MaxBeckers\AmazonAlexa\Request\Request;
-use MaxBeckers\AmazonAlexa\Response\ResponseBuilder;
+use Rboschin\AmazonAlexa\RequestHandler\AbstractRequestHandler;
+use Rboschin\AmazonAlexa\Request\Request;
+use Rboschin\AmazonAlexa\Response\ResponseBuilder;
 
 /**
  * Handler for MyIntent intent
@@ -38,11 +38,11 @@ class MyIntentHandler extends AbstractRequestHandler
 
     public function supportsRequest(Request $request): bool
     {
-        return $request->request instanceof \MaxBeckers\AmazonAlexa\Request\Request\Standard\IntentRequest &&
+        return $request->request instanceof \Rboschin\AmazonAlexa\Request\Request\Standard\IntentRequest &&
                $request->request->intent->name === 'MyIntent';
     }
 
-    public function handleRequest(Request $request): \MaxBeckers\AmazonAlexa\Response\Response
+    public function handleRequest(Request $request): \Rboschin\AmazonAlexa\Response\Response
     {
         $slotValue = $request->request->intent->slots['exampleSlot']->value ?? null;
         
@@ -100,9 +100,9 @@ After generating handlers, you can integrate them into your skill:
 <?php
 require 'vendor/autoload.php';
 
-use MaxBeckers\AmazonAlexa\Application\SkillApplication;
-use MaxBeckers\AmazonAlexa\RequestHandler\IntentRouter;
-use MaxBeckers\AmazonAlexa\RequestHandler\IntentRouterAdapter;
+use Rboschin\AmazonAlexa\Application\SkillApplication;
+use Rboschin\AmazonAlexa\RequestHandler\IntentRouter;
+use Rboschin\AmazonAlexa\RequestHandler\IntentRouterAdapter;
 use App\Handlers\LaunchHandler;
 use App\Handlers\HelpHandler;
 use App\Handlers\OrderPizzaHandler;

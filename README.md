@@ -1,44 +1,112 @@
-[![Build Status](https://scrutinizer-ci.com/g/maxbeckers/amazon-alexa-php/badges/build.png?b=master)](https://scrutinizer-ci.com/g/maxbeckers/amazon-alexa-php/?branch=master)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/maxbeckers/amazon-alexa-php/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/maxbeckers/amazon-alexa-php/?branch=master)
-[![Coverage Status](https://scrutinizer-ci.com/g/maxbeckers/amazon-alexa-php/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/maxbeckers/amazon-alexa-php/?branch=master)
 [![MIT Licence](https://badges.frapsoft.com/os/mit/mit.svg?v=103)](https://opensource.org/licenses/mit-license.php)
-[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/maxbeckers/amazon-alexa-php/issues)
+[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/rboschin/amazon-alexa-php/issues)
 
 # Amazon Alexa PHP Library
 
-A modern PHP library for building Amazon Alexa skills with clean, maintainable code. This library simplifies handling Alexa requests by providing a robust validation system, flexible request handlers, and helper utilities for common tasks.
+A modern PHP library for building Amazon Alexa skills with clean, maintainable code and fluent APIs. This library significantly reduces boilerplate code and provides an intuitive development workflow for Alexa skill developers.
 
 ## 🚀 Features
 
-- **Request Validation**: Automatic verification of Amazon request signatures
-- **Flexible Handler System**: Easy-to-extend request handler architecture
-- **SSML Support**: Built-in Speech Synthesis Markup Language generator
-- **APL Support**: Create and send Alexa Presentation Language documents, components, directives, gestures and commands
-- **Device Address API**: Helper for accessing user location data
-- **PHP 8.2+ Ready**: Leverages modern PHP features and type safety
-- **Symfony Integration**: Available bundle for Symfony applications
+### Core Improvements
+- **🔧 SkillApplication**: Simplified bootstrap (reduces ~50 lines to ~15 lines)
+- **🎯 IntentRouter**: Expressive intent routing with fluent API
+- **📝 ResponseBuilder**: Chainable response creation with modern syntax
+- **🔒 RequestValidator**: Configurable validation with PSR-18 support
+- **🎤 SsmlGenerator**: Fluent SSML generation with helper methods
+- **💾 SessionHelper**: Convenient session attribute management
+
+### Development Tools
+- **🧪 IntentRequestFactory**: Easy test request creation
+- **⚡ CLI Generator**: Command-line tool for generating handler skeletons
+- **📚 Complete Documentation**: Comprehensive guides and examples
+
+### Legacy Features
+- **✅ Request Validation**: Automatic verification of Amazon request signatures
+- **🔧 Flexible Handler System**: Easy-to-extend request handler architecture
+- **🎤 SSML Support**: Built-in Speech Synthesis Markup Language generator
+- **🖥 APL Support**: Create and send Alexa Presentation Language documents
+- **📍 Device Address API**: Helper for accessing user location data
+- **🚀 PHP 8.2+ Ready**: Leverages modern PHP features and type safety
 
 ## 📋 Requirements
 
 - PHP 8.2 or higher
-- Composer
+- ext-openssl (for request validation)
 
 ## 🔧 Installation
 
+### From GitHub (Recommended)
+
 ```bash
-composer require maxbeckers/amazon-alexa-php
+# Clone the repository
+git clone https://github.com/rboschin/amazon-alexa-php.git
+
+# Navigate to the directory
+cd amazon-alexa-php
+
+# Install dependencies
+composer install
+```
+
+### In Your Project
+
+```bash
+# Add to your project's composer.json
+{
+    "require": {
+        "rboschin/amazon-alexa-php": "dev-main"
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/rboschin/amazon-alexa-php.git"
+        }
+    ]
+}
+
+# Install
+composer update rboschin/amazon-alexa-php
 ```
 
 ## 🚀 Quick Start
 
-### Basic Request Handling
+### Modern Approach (Recommended)
+
+```php
+'''php
+<?php
+require 'vendor/autoload.php';
+
+use Rboschin\AmazonAlexa\Application\SkillApplication;
+use Rboschin\AmazonAlexa\RequestHandler\IntentRouter;
+use Rboschin\AmazonAlexa\RequestHandler\IntentRouterAdapter;
+
+// Create router and register handlers
+$router = new IntentRouter();
+$router->onIntent('MyIntent', new MyIntentHandler())
+       ->onLaunch(new LaunchHandler())
+       ->onFallback(new FallbackHandler());
+
+// Create and run application
+$app = SkillApplication::fromGlobals(
+    requestHandlerRegistry: new IntentRouterAdapter($router)
+);
+
+$response = $app->handle();
+echo json_encode($response);
+
+```
+
+### Legacy Approach (Still Supported)
+
 
 ```php
 <?php
+require 'vendor/autoload.php';
 
-use MaxBeckers\AmazonAlexa\Request\Request;
-use MaxBeckers\AmazonAlexa\Validation\RequestValidator;
-use MaxBeckers\AmazonAlexa\RequestHandler\RequestHandlerRegistry;
+use Rboschin\AmazonAlexa\Request\Request;
+use Rboschin\AmazonAlexa\Validation\RequestValidator;
+use Rboschin\AmazonAlexa\RequestHandler\RequestHandlerRegistry;
 
 // 1. Parse incoming request
 $requestBody = file_get_contents('php://input');
@@ -48,289 +116,240 @@ $alexaRequest = Request::fromAmazonRequest(
     $_SERVER['HTTP_SIGNATURE'] ?? ''
 );
 
-// 2. Validate request authenticity
+// 2. Validate request
 $validator = new RequestValidator();
 $validator->validate($alexaRequest);
 
 // 3. Handle request
-$registry = new RequestHandlerRegistry();
-$registry->addHandler(new MyIntentHandler());
-
+$registry = new RequestHandlerRegistry([$handler1, $handler2]);
 $handler = $registry->getSupportingHandler($alexaRequest);
 $response = $handler->handleRequest($alexaRequest);
 
 // 4. Send response
-header('Content-Type: application/json');
 echo json_encode($response);
-```
-
-## 🎯 Creating Request Handlers
-
-### Simple Intent Handler (PHP 8.2+)
-
-```php
-<?php
-
-use MaxBeckers\AmazonAlexa\Request\Request;
-use MaxBeckers\AmazonAlexa\Response\Response;
-use MaxBeckers\AmazonAlexa\RequestHandler\AbstractRequestHandler;
-use MaxBeckers\AmazonAlexa\Request\Request\Standard\IntentRequest;
-
-class WelcomeIntentHandler extends AbstractRequestHandler
-{
-    public function __construct(
-        private readonly array $supportedApplicationIds = ['amzn1.ask.skill.your-skill-id']
-    ) {
-        parent::__construct();
-    }
-
-    public function supportsRequest(Request $request): bool
-    {
-        return $request->request instanceof IntentRequest &&
-               $request->request->intent->name === 'WelcomeIntent';
-    }
-
-    public function handleRequest(Request $request): Response
-    {
-        return $this->responseHelper->respond(
-            outputSpeech: 'Welcome to our amazing skill!',
-            shouldEndSession: false
-        );
-    }
-}
-```
-
-### Advanced Handler with Slots
-
-```php
-<?php
-
-use MaxBeckers\AmazonAlexa\Request\Request;
-use MaxBeckers\AmazonAlexa\Response\Response;
-use MaxBeckers\AmazonAlexa\RequestHandler\AbstractRequestHandler;
-use MaxBeckers\AmazonAlexa\Request\Request\Standard\IntentRequest;
-
-class UserInfoHandler extends AbstractRequestHandler
-{
-    public function __construct(
-        private readonly array $supportedApplicationIds = ['amzn1.ask.skill.your-skill-id']
-    ) {
-        parent::__construct();
-    }
-
-    public function supportsRequest(Request $request): bool
-    {
-        return $request->request instanceof IntentRequest &&
-               $request->request->intent->name === 'GetUserInfoIntent';
-    }
-
-    public function handleRequest(Request $request): Response
-    {
-        $intentRequest = $request->request;
-        $userName = $intentRequest->intent->slots['userName']->value ?? 'friend';
-        
-        $message = match($userName) {
-            'admin' => 'Hello administrator! You have special privileges.',
-            'guest' => 'Welcome, guest user. Limited features available.',
-            default => "Nice to meet you, {$userName}!"
-        };
-
-        return $this->responseHelper->respond($message);
-    }
-}
-```
-
-## 🎤 SSML Generation
-
-Create rich speech responses with the SSML generator:
-
-```php
-<?php
-
-use MaxBeckers\AmazonAlexa\Helper\SsmlGenerator;
-
-$ssmlGenerator = new SsmlGenerator();
-$ssmlGenerator
-    ->say('Welcome to our cooking skill!')
-    ->pauseStrength(SsmlGenerator::BREAK_STRENGTH_MEDIUM)
-    ->say('Today we will learn about')
-    ->emphasis('amazing', SsmlGenerator::EMPHASIS_STRONG)
-    ->say('pasta recipes.')
-    ->pauseTime('2s')
-    ->say('Let\'s get started!');
-
-$ssml = $ssmlGenerator->getSsml();
-// Result: <speak>Welcome to our cooking skill! <break strength="medium" /> Today we will learn about <emphasis level="strong">amazing</emphasis> pasta recipes. <break time="2s" /> Let's get started!</speak>
-```
-
-## 🖼 APL (Alexa Presentation Language)
-
-Build multimodal experiences with the included APL directive, component, command, and gesture classes:
-
-```php
-<?php
-
-use MaxBeckers\AmazonAlexa\Response\Directives\APL\RenderDocumentDirective;
-use MaxBeckers\AmazonAlexa\Response\Response;
-use MaxBeckers\AmazonAlexa\ResponseHelper;
-
-// Inside a request handler:
-$document = [
-    'type' => 'APL',
-    'version' => '1.8',
-    'mainTemplate' => [
-        'items' => [
-            [
-                'type' => 'Text',
-                'text' => '${payload.data.message}',
-                'style' => 'textStylePrimary1'
-            ]
-        ]
-    ],
-];
-
-$dataSources = [
-    'data' => [
-        'message' => 'Hello from APL!'
-    ],
-];
-
-$aplDirective = new RenderDocumentDirective(
-    token: 'mainScreen',
-    document: $document,
-    datasources: $dataSources
-);
-
-// Using the response helper (if available in your handler base)
-$response = $this->responseHelper->respond(
-    outputSpeech: 'Showing a visual response.',
-    directives: [$aplDirective],
-    shouldEndSession: false
-);
-
-// Or manually:
-$alexaResponse = new Response();
-$alexaResponse->response->directives[] = $aplDirective;
-```
-
-You can also leverage the rich PHP class model (components, commands, gestures, layouts) instead of raw arrays for stronger typing when building complex documents.
-
-## 📍 Device Address Information
-
-Access user location data with proper permissions:
-
-```php
-<?php
-
-use MaxBeckers\AmazonAlexa\Helper\DeviceAddressInformationHelper;
-
-$addressHelper = new DeviceAddressInformationHelper();
-
-try {
-    // Get full address (requires "read::alexa:device:all:address" permission)
-    $fullAddress = $addressHelper->getAddress($request);
-    
-    // Get country and postal code only (requires "read::alexa:device:all:address:country_and_postal_code" permission)
-    $countryAndPostalCode = $addressHelper->getCountryAndPostalCode($request);
-    
-    $response = $this->responseHelper->respond(
-        "I found your location in {$fullAddress->city}, {$fullAddress->stateOrRegion}"
-    );
-} catch (Exception $e) {
-    $response = $this->responseHelper->respond(
-        'I need permission to access your address. Please check your Alexa app.'
-    );
-}
-```
-
-## 🛡️ Error Handling
-
-Implement robust error handling:
-
-```php
-<?php
-
-use MaxBeckers\AmazonAlexa\Exception\ValidationException;
-
-try {
-    $validator = new RequestValidator();
-    $validator->validate($alexaRequest);
-} catch (ValidationException $e) {
-    http_response_code(400);
-    echo json_encode(['error' => 'Invalid request signature']);
-    exit;
-} catch (Exception $e) {
-    http_response_code(500);
-    error_log('Alexa skill error: ' . $e->getMessage());
-    echo json_encode(['error' => 'Internal server error']);
-    exit;
-}
-```
-
-## 🔗 Advanced Usage
-
-### Custom Response Builder
-
-```php
-<?php
-
-use MaxBeckers\AmazonAlexa\Response\Response;
-use MaxBeckers\AmazonAlexa\Response\OutputSpeech;
-use MaxBeckers\AmazonAlexa\Response\Card;
-
-public function handleRequest(Request $request): Response
-{
-    $outputSpeech = new OutputSpeech();
-    $outputSpeech->type = OutputSpeech::TYPE_SSML;
-    $outputSpeech->ssml = '<speak>Custom SSML response</speak>';
-    
-    $card = new Card();
-    $card->type = Card::TYPE_SIMPLE;
-    $card->title = 'Skill Response';
-    $card->content = 'This appears in the Alexa app';
-    
-    $response = new Response();
-    $response->outputSpeech = $outputSpeech;
-    $response->card = $card;
-    $response->shouldEndSession = false;
-    
-    return $response;
-}
-```
-
-### Registry with Multiple Handlers
-
-```php
-<?php
-
-$registry = new RequestHandlerRegistry();
-$registry->addHandler(new LaunchRequestHandler());
-$registry->addHandler(new WelcomeIntentHandler());
-$registry->addHandler(new HelpIntentHandler());
-$registry->addHandler(new StopIntentHandler());
-$registry->addHandler(new SessionEndedRequestHandler());
-```
-
-## 🎛️ Symfony Integration
-
-For Symfony applications, use the dedicated bundle:
-
-```bash
-composer require maxbeckers/amazon-alexa-bundle
-```
-
-Visit [maxbeckers/amazon-alexa-bundle](https://github.com/maxbeckers/amazon-alexa-bundle) for detailed integration instructions.
+'''
 
 ## 📚 Documentation
 
-- [Amazon Alexa Skills Kit Documentation](https://developer.amazon.com/docs/ask-overviews/build-skills-with-the-alexa-skills-kit.html)
-- [Device Address API](https://developer.amazon.com/docs/custom-skills/device-address-api.html)
-- [SSML Reference](https://developer.amazon.com/docs/custom-skills/speech-synthesis-markup-language-ssml-reference.html)
+### Getting Started Guides
+- [📖 Project Structure](docs/PROJECT_STRUCTURE.md) - Recommended organization and best practices
+- [🎯 Objectives](docs/OBJECTIVES.md) - Development goals and requirements
+- [📋 Work Plan](docs/WORKPLAN.md) - Detailed implementation phases
+- [🔧 Improvements](docs/IMPROVEMENTS.md) - Complete list of enhancements
+
+### Examples
+- [🏗 Basic Skill Application](examples/skill-application-basic.php) - Modern bootstrap example
+- [🎯 Intent Router Usage](examples/intent-router-basic.php) - Expressive routing patterns
+- [📝 Response Builder Fluent](examples/response-builder-fluent.php) - Chainable response creation
+- [🔒 Improved Request Validator](examples/request-validator-improved.php) - Advanced validation features
+- [🎤 SSML Generator Fluent](examples/ssml-generator-fluent.php) - Modern SSML generation
+- [🏆 Complete Modern Skill](examples/complete-modern-skill.php) - Full-featured example
+- [⚡ CLI Generator Usage](examples/cli-generator-usage.md) - Command-line tool guide
+
+### API Reference
+- [📖 API Documentation](https://github.com/rboschin/amazon-alexa-php/docs) - Complete API reference
+- [🧪 Testing Guide](docs/PROJECT_STRUCTURE.md#testing-structure) - Testing best practices
+
+## 🛠️ Development Tools
+
+### CLI Generator
+
+Generate handler skeletons quickly:
+
+'''bash
+# Generate intent handler
+php bin/alexa make:intent-handler MyIntentHandler --intent=MyIntent
+
+# Generate launch handler  
+php bin/alexa make:launch-handler LaunchHandler
+
+# Generate help handler
+php bin/alexa make:help-handler HelpHandler
+'''
+
+### Testing Utilities
+
+Create test requests easily:
+
+'''php
+use Rboschin\AmazonAlexa\TestSupport\IntentRequestFactory;
+
+// Create intent request
+$request = IntentRequestFactory::forIntent('MyIntent', ['slot' => 'value']);
+
+// Create launch request
+$launchRequest = IntentRequestFactory::forLaunch();
+
+// Create request with session attributes
+$request = IntentRequestFactory::withSessionAttributes($request, ['key' => 'value']);
+'''
+
+## 🧪 Testing
+
+'''bash
+# Run all tests
+composer test
+
+# Run specific test suite
+./vendor/bin/phpunit test/Test/Application/SkillApplicationTest.php
+
+# Run tests with coverage
+./vendor/bin/phpunit --coverage-html coverage
+'''
+
+## 📦 Optional Dependencies
+
+Enhance your installation with these optional packages:
+
+'''bash
+# PSR-18 HTTP client support
+composer require psr/http-client
+
+# PSR-7 message factory support  
+composer require psr/http-factory
+
+# PSR-7 implementation
+composer require guzzlehttp/psr7
+# or
+composer require nyholm/psr7
+'''
+
+## 🔧 Configuration
+
+### Environment Variables
+
+'''bash
+# .env file
+ALEXA_SKILL_ID=amzn1.ask.skill.your-skill
+ALEXA_DEBUG=false
+ALEXA_CERT_CACHE_DIR=/tmp/alexa-certs
+'''
+
+### Request Validator Configuration
+
+'''php
+use Rboschin\AmazonAlexa\Validation\RequestValidator;
+
+// Development mode (disable signature validation)
+$validator = new RequestValidator(disableSignatureValidation: true);
+
+// Custom certificate cache directory
+$validator = new RequestValidator(certCacheDir: '/custom/cache/path');
+
+// Custom timestamp tolerance (seconds)
+$validator = new RequestValidator(timestampTolerance: 300);
+
+// PSR-18 HTTP client
+$psr18Client = new MyPsr18Client();
+$validator = new RequestValidator(client: $psr18Client);
+'''
+
+## 🔄 Migration from Original Package
+
+If you're migrating from the original `maxbeckers/amazon-alexa-php` package:
+
+### 1. Update Your Dependencies
+
+```bash
+# Remove original package (if installed)
+composer remove maxbeckers/amazon-alexa-php
+
+# Add GitHub repository to your composer.json
+{
+    "require": {
+        "rboschin/amazon-alexa-php": "dev-main"
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/rboschin/amazon-alexa-php.git"
+        }
+    ]
+}
+
+# Install the new package
+composer update rboschin/amazon-alexa-php
+```
+
+### 2. Update Namespace
+
+```php
+// Old
+use MaxBeckers\AmazonAlexa\Request\Request;
+
+// New  
+use Rboschin\AmazonAlexa\Request\Request;
+'''
+
+### 3. Modernize Your Code
+
+'''php
+// Old approach
+$registry = new RequestHandlerRegistry([$handler1, $handler2]);
+
+// New approach
+$router = new IntentRouter();
+$router->onIntent('MyIntent', $handler1)
+       ->onIntent('AnotherIntent', $handler2);
+$registry = new IntentRouterAdapter($router);
+'''
+
+## 🏗️ Architecture
+
+### Modern Development Workflow
+
+1. **Bootstrap** - Use 'SkillApplication::fromGlobals()' for simplified setup
+2. **Routing** - Use 'IntentRouter' for expressive handler registration  
+3. **Responses** - Use 'ResponseBuilder' for chainable response creation
+4. **SSML** - Use 'SsmlGenerator::create()' for fluent speech generation
+5. **Testing** - Use 'IntentRequestFactory' for easy test creation
+6. **Development** - Use CLI generator for rapid prototyping
+
+### Backward Compatibility
+
+All legacy APIs remain fully functional. You can gradually migrate to modern approaches at your own pace.
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
+1. Fork the repository
+2. Create a feature branch ('git checkout -b feature/amazing-feature')
+3. Commit your changes ('git commit -am 'Add amazing feature'')
+4. Push to the branch ('git push origin feature/amazing-feature')
+5. Open a Pull Request
+
+### Development Setup
+
+'''bash
+# Clone the repository
+git clone https://github.com/rboschin/amazon-alexa-php.git
+cd amazon-alexa-php
+
+# Install dependencies
+composer install
+
+# Run tests
+composer test
+
+# Check code style
+composer cs
+'''
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](https://opensource.org/licenses/mit-license.php) file for details.
+This library is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- Original library by [Maximilian Beckers](https://github.com/maxbeckers)
+- Enhanced and maintained by [Roberto Boschin](https://github.com/rboschin)
+- Community contributions and feedback
+
+## 🔗 Links
+
+- [GitHub Repository](https://github.com/rboschin/amazon-alexa-php)
+- [Issue Tracker](https://github.com/rboschin/amazon-alexa-php/issues)
+- [Documentation](https://github.com/rboschin/amazon-alexa-php/tree/master/docs)
+
+---
+
+**⚡ Ready to build amazing Alexa skills with modern PHP development!**

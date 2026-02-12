@@ -1,0 +1,58 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Handlers;
+
+use Rboschin\AmazonAlexa\RequestHandler\AbstractRequestHandler;
+use Rboschin\AmazonAlexa\Request\Request;
+use Rboschin\AmazonAlexa\Response\ResponseBuilder;
+
+/**
+ * {{DESCRIPTION}}
+ */
+class {{CLASS_NAME}} extends AbstractRequestHandler
+{
+    public function supportsApplication(Request $request): bool
+    {
+        return true; // Add your skill ID check here
+    }
+
+    public function supportsRequest(Request $request): bool
+    {
+        return $request->request instanceof \Rboschin\AmazonAlexa\Request\Request\Standard\IntentRequest &&
+               in_array($request->request->intent->name, [
+                   'AMAZON.HelpIntent',
+                   'AMAZON.CancelIntent',
+                   'AMAZON.StopIntent'
+               ]);
+    }
+
+    public function handleRequest(Request $request): \Rboschin\AmazonAlexa\Response\Response
+    {
+        $intentName = $request->request->intent->name;
+        
+        switch ($intentName) {
+            case 'AMAZON.HelpIntent':
+                return ResponseBuilder::create()
+                    ->text('You can ask me to do various things. What would you like to know?')
+                    ->reprompt('How can I help you?')
+                    ->keepSession()
+                    ->build();
+            
+            case 'AMAZON.CancelIntent':
+            case 'AMAZON.StopIntent':
+                return ResponseBuilder::create()
+                    ->text('Goodbye!')
+                    ->endSession(true)
+                    ->build();
+            
+            default:
+                return ResponseBuilder::create()
+                    ->text('I can help you with that. What would you like to do?')
+                    ->reprompt('How can I assist you?')
+                    ->keepSession()
+                    ->build();
+        }
+    }
+}

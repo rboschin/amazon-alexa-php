@@ -48,6 +48,9 @@ class AlexaCli
             case 'make:help-handler':
                 $this->makeHelpHandler($args);
                 break;
+            case 'generate:interaction-model':
+                $this->generateInteractionModel($args);
+                break;
             case 'list':
                 $this->listTemplates();
                 break;
@@ -60,23 +63,131 @@ class AlexaCli
     private function makeIntentHandler(array $args): void
     {
         $options = $this->parseArgs($args);
-        $className = $options['name'] ?? 'MyIntentHandler';
-        $intentName = $options['intent'] ?? 'MyIntent';
-
-        if (!$className) {
-            $this->error('Handler class name is required');
+        $interactive = in_array('--interactive', $args) || in_array('-i', $args);
+        
+        if ($interactive) {
+            $this->interactiveIntentHandler();
             return;
         }
 
+        $className = $options['name'] ?? null;
+        $intentName = $options['intent'] ?? null;
+
+        if (!$className || !$intentName) {
+            $this->error('Both --name and --intent are required');
+            return;
+        }
+
+        $utterances = $options['utterances'] ?? [];
+        if (is_string($utterances)) {
+            $utterances = explode(',', $utterances);
+        }
+
+        $template = $this->getTemplate('intent-handler.php.template');
+        $content = str_replace(
+            ['{{NAMESPACE}}', '{{CLASS_NAME}}', '{{INTENT_NAME}}', '{{DESCRIPTION}}', '{{UTTERANCES}}'],
+            [
+                $options['namespace'] ?? 'App\\Handlers',
+                $className,
+                $intentName,
+                'Handler for ' . $intentName,
+                $this->formatUtterances($utterances)
+            ],
+            $template
+        );
+
+        $this->writeFile($className . '.php', $content);
+        $this->success("Created intent handler: {$className}.php");
+    }
+
+    private function interactiveIntentHandler(): void
+    {
+        $this->info("🚀 Interactive Intent Handler Generator\n");
+
+        // Get class name
+        $className = $this->ask("Handler class name (e.g., OrderPizzaHandler): ");
+        if (empty($className)) {
+            $this->error("Class name is required");
+            return;
+        }
+
+        // Get intent name
+        $intentName = $this->ask("Intent name (e.g., OrderPizzaIntent): ");
+        if (empty($intentName)) {
+            $this->error("Intent name is required");
+            return;
+        }
+
+        // Get description
+        $description = $this->ask("Description (optional): ", "Handler for {$intentName}");
+
+        // Get utterances interactively
+        $this->info("\n📝 Sample Utterances (press Enter to finish):");
+        $utterances = [];
+        
+        // Suggest some utterances
+        require_once __DIR__ . '/../src/Generator/UtteranceExtractor.php';
+        $extractor = new \Rboschin\AmazonAlexa\Generator\UtteranceExtractor();
+        $suggestions = $extractor->suggestUtterances($intentName);
+        
+        if (!empty($suggestions)) {
+            $this->info("Suggested utterances:");
+            foreach ($suggestions as $i => $suggestion) {
+                echo "  " . ($i + 1) . ". {$suggestion}\n";
+            }
+            
+            $useSuggestions = $this->ask("Use these suggestions? (y/n): ", 'y');
+            if (strtolower($useSuggestions) === 'y') {
+                $utterances = $suggestions;
+            }
+        }
+
+        if (empty($utterances) || strtolower($this->ask("Add custom utterances? (y/n): ", 'n')) === 'y') {
+            do {
+                $utterance = $this->ask("Enter utterance (or press Enter to finish): ");
+                if (!empty($utterance)) {
+                    $utterances[] = $utterance;
+                }
+            } while (!empty($utterance));
+        }
+
+        // Get slots
+        $this->info("\n🎯 Slots (press Enter to finish):");
+        $slots = [];
+        do {
+            $slotName = $this->ask("Slot name (or press Enter to finish): ");
+            if (!empty($slotName)) {
+                $slotType = $this->ask("Slot type (e.g., AMAZON.NUMBER, AMAZON.DATE, custom): ", 'AMAZON.LITERAL');
+                $slots[$slotName] = $slotType;
+            }
+        } while (!empty($slotName));
+
+        // Generate the handler
         $template = $this->getTemplate('intent-handler.php.template');
         $content = str_replace([
             '{{CLASS_NAME}}' => $className,
             '{{INTENT_NAME}}' => $intentName,
-            '{{DESCRIPTION}}' => "Handler for {$intentName} intent"
+            '{{DESCRIPTION}}' => $description,
+            '{{UTTERANCES}}' => $this->formatUtterances($utterances),
+            '{{SLOTS}}' => $this->formatSlots($slots)
         ], $template);
 
         $this->writeFile($className . '.php', $content);
-        $this->success("Created intent handler: {$className}.php");
+        $this->success("✅ Created intent handler: {$className}.php");
+
+        // Show summary
+        $this->info("\n📊 Summary:");
+        $this->info("  Class: {$className}");
+        $this->info("  Intent: {$intentName}");
+        $this->info("  Utterances: " . count($utterances));
+        $this->info("  Slots: " . count($slots));
+
+        if (!empty($utterances)) {
+            $this->info("\n📝 Utterances added to docblock:");
+            foreach ($utterances as $utterance) {
+                $this->info("  - {$utterance}");
+            }
+        }
     }
 
     private function makeLaunchHandler(array $args): void
@@ -119,15 +230,119 @@ class AlexaCli
         $this->success("Created help handler: {$className}.php");
     }
 
+    private function generateInteractionModel(array $args): void
+    {
+        // Parse arguments properly handling quoted strings
+        $options = [];
+        $currentKey = null;
+        
+        foreach ($args as $arg) {
+            if (strpos($arg, '--') === 0 && strpos($arg, '=') !== false) {
+                // Simple case: --option=value
+                list($key, $value) = explode('=', $arg, 2);
+                $currentKey = str_replace('--', '', $key);
+                $options[$currentKey] = $value;
+            } elseif (strpos($arg, '--') === 0) {
+                // Complex case: --option "value with spaces"
+                $currentKey = str_replace('--', '', $arg);
+            } elseif ($currentKey !== null) {
+                // Value for previous key
+                $options[$currentKey] = trim($arg, '"\'');
+                $currentKey = null;
+            }
+        }
+
+        $skillName = $options['skill'] ?? 'MySkill';
+        $invocationName = $options['invocation'] ?? 'my skill';
+        $locale = $options['locale'] ?? 'en-US';
+        $handlersDir = $options['handlers'] ?? 'src/Handlers';
+        $namespace = $options['namespace'] ?? 'App\\Handlers';
+        $output = $options['output'] ?? 'interaction-model.json';
+
+        if (!is_dir($handlersDir)) {
+            $this->error("Handlers directory not found: {$handlersDir}");
+            return;
+        }
+
+        // Include autoloader
+        if (file_exists(__DIR__ . '/../vendor/autoload.php')) {
+            require_once __DIR__ . '/../vendor/autoload.php';
+        }
+
+        require_once __DIR__ . '/../src/Generator/InteractionModelGenerator.php';
+
+        $generator = new \Rboschin\AmazonAlexa\Generator\InteractionModelGenerator(
+            $skillName,
+            $invocationName,
+            $locale
+        );
+
+        try {
+            // Load handlers from directory
+            $generator->loadHandlersFromDirectory($handlersDir, $namespace);
+            
+            // Analyze handlers
+            $generator->analyze();
+
+            // Get analysis results
+            $intents = $generator->getIntents();
+            $handlers = $generator->getHandlers();
+
+            $this->info("Found " . count($handlers) . " handlers:");
+            foreach ($handlers as $handler) {
+                $this->info("  - {$handler}");
+            }
+
+            $this->info("Detected " . count($intents) . " intents:");
+            foreach ($intents as $intentName => $intentData) {
+                $this->info("  - {$intentName}");
+                if (!empty($intentData['slots'])) {
+                    foreach ($intentData['slots'] as $slot) {
+                        $this->info("    Slot: {$slot['name']} ({$slot['type']})");
+                    }
+                }
+            }
+
+            // Generate and save interaction model
+            $generator->saveToFile($output);
+            $this->success("Interaction model generated: {$output}");
+
+            // Show warning about potential limitations
+            $this->info("\n⚠️  Note: This is an auto-generated interaction model.");
+            $this->info("   You should review and enhance it with:");
+            $this->info("   - More sample utterances");
+            $this->info("   - Custom slot types");
+            $this->info("   - Synonyms and variations");
+            $this->info("   - Dialog management if needed");
+
+        } catch (\Exception $e) {
+            $this->error("Error generating interaction model: " . $e->getMessage());
+        }
+    }
+
     private function parseArgs(array $args): array
     {
         $options = [];
         
         foreach ($args as $arg) {
-            if (str_starts_with($arg, '--name=')) {
+            if (strpos($arg, '--name=') === 0) {
                 $options['name'] = substr($arg, 7);
-            } elseif (str_starts_with($arg, '--intent=')) {
+            } elseif (strpos($arg, '--intent=') === 0) {
                 $options['intent'] = substr($arg, 9);
+            } elseif (strpos($arg, '--utterances=') === 0) {
+                $options['utterances'] = substr($arg, 13);
+            } elseif (strpos($arg, '--skill=') === 0) {
+                $options['skill'] = substr($arg, 8);
+            } elseif (strpos($arg, '--invocation=') === 0) {
+                $options['invocation'] = substr($arg, 13);
+            } elseif (strpos($arg, '--locale=') === 0) {
+                $options['locale'] = substr($arg, 9);
+            } elseif (strpos($arg, '--handlers=') === 0) {
+                $options['handlers'] = substr($arg, 12);
+            } elseif (strpos($arg, '--namespace=') === 0) {
+                $options['namespace'] = substr($arg, 12);
+            } elseif (strpos($arg, '--output=') === 0) {
+                $options['output'] = substr($arg, 9);
             }
         }
         
@@ -178,6 +393,12 @@ class AlexaCli
         foreach ($templates as $file => $description) {
             echo "  {$file} - {$description}\n";
         }
+
+        $this->info("\nAvailable commands:");
+        echo "  make:intent-handler - Generate intent handler skeleton\n";
+        echo "  make:launch-handler - Generate launch handler skeleton\n";
+        echo "  make:help-handler - Generate help handler skeleton\n";
+        echo "  generate:interaction-model - Generate Alexa interaction model from handlers\n";
     }
 
     private function showHelp(): void
@@ -189,14 +410,32 @@ class AlexaCli
         echo "  make:intent-handler <name> --intent=<intent>    Generate intent handler\n";
         echo "  make:launch-handler <name>                Generate launch handler\n";
         echo "  make:help-handler <name>                  Generate help handler\n";
+        echo "  generate:interaction-model                 Generate Alexa interaction model\n";
         echo "  list                                      List available templates\n\n";
         echo "Options:\n";
         echo "  --name=<ClassName>                        Handler class name\n";
-        echo "  --intent=<IntentName>                      Intent name (for intent handlers)\n\n";
+        echo "  --intent=<IntentName>                      Intent name (for intent handlers)\n";
+        echo "  --utterances=<utterance1,utterance2>       Sample utterances (comma-separated)\n";
+        echo "  --interactive, -i                         Interactive mode with guided prompts\n";
+        echo "  --skill=<SkillName>                        Skill name (for interaction model)\n";
+        echo "  --invocation=<Name>                       Invocation name (for interaction model)\n";
+        echo "  --locale=<Locale>                          Locale (default: en-US)\n";
+        echo "  --handlers=<Directory>                     Handlers directory (default: src/Handlers)\n";
+        echo "  --namespace=<Namespace>                     Handler namespace (default: App\\Handlers)\n";
+        echo "  --output=<File>                          Output file (default: interaction-model.json)\n\n";
         echo "Examples:\n";
         echo "  php bin/alexa make:intent-handler MyIntent --intent=MyIntent\n";
+        echo "  php bin/alexa make:intent-handler OrderPizza --intent=OrderPizzaIntent --utterances=\"order pizza, get me a pizza\"\n";
+        echo "  php bin/alexa make:intent-handler -i --interactive\n";
         echo "  php bin/alexa make:launch-handler LaunchHandler\n";
         echo "  php bin/alexa make:help-handler HelpHandler\n";
+        echo "  php bin/alexa generate:interaction-model --skill='My Skill' --invocation='my skill'\n\n";
+        echo "Features:\n";
+        echo "  @utterances tag support in docblocks\n";
+        echo "  Interactive mode with guided prompts\n";
+        echo "  Automatic utterance suggestions\n";
+        echo "  Slot type inference\n";
+        echo "  Complete interaction model generation\n";
     }
 
     private function success(string $message): void
@@ -207,6 +446,55 @@ class AlexaCli
     private function error(string $message): void
     {
         echo "\033[31m✗\033[0m {$message}\n";
+    }
+
+    private function ask(string $question, string $default = ''): string
+    {
+        if (!empty($default)) {
+            echo "\033[36m? \033[0m{$question} [\033[33m{$default}\033[0m]: ";
+        } else {
+            echo "\033[36m? \033[0m{$question}: ";
+        }
+        
+        $handle = fopen('php://stdin', 'r');
+        if ($handle === false) {
+            return $default;
+        }
+        
+        $answer = fgets($handle);
+        if ($answer === false) {
+            fclose($handle);
+            return $default;
+        }
+        
+        fclose($handle);
+        $answer = trim($answer);
+        
+        return empty($answer) ? $default : $answer;
+    }
+
+    private function formatUtterances(array $utterances): string
+    {
+        if (empty($utterances)) {
+            return '';
+        }
+
+        $lines = [' * @utterances ' . implode(', ', $utterances)];
+        return implode("\n", $lines);
+    }
+
+    private function formatSlots(array $slots): string
+    {
+        if (empty($slots)) {
+            return '';
+        }
+
+        $lines = [' * @slots'];
+        foreach ($slots as $name => $type) {
+            $lines[] = " *   {$name}: {$type}";
+        }
+        
+        return implode("\n", $lines);
     }
 
     private function info(string $message): void
