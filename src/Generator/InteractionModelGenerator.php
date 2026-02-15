@@ -63,10 +63,19 @@ class InteractionModelGenerator
             if ($file->isFile() && $file->getExtension() === 'php') {
                 $className = $namespace . '\\' . $file->getBasename('.php');
                 
+                // Try to include the file first
+                $filePath = $file->getPathname();
+                require_once $filePath;
+                
                 if (class_exists($className)) {
-                    $reflection = new ReflectionClass($className);
-                    if ($reflection->isSubclassOf(AbstractRequestHandler::class)) {
-                        $this->handlers[] = $reflection->newInstance();
+                    try {
+                        $reflection = new ReflectionClass($className);
+                        if ($reflection->isSubclassOf(AbstractRequestHandler::class) && !$reflection->isAbstract()) {
+                            $this->handlers[] = $reflection->newInstance();
+                        }
+                    } catch (\ReflectionException $e) {
+                        // Skip invalid classes
+                        continue;
                     }
                 }
             }
@@ -107,6 +116,29 @@ class InteractionModelGenerator
     private function analyzeHandler(AbstractRequestHandler $handler): void
     {
         $reflection = new ReflectionClass($handler);
+        $handlerClass = $reflection->getName();
+
+        // Check for LaunchRequest handler (special case)
+        if ($reflection->hasMethod('supportsRequest')) {
+            $method = $reflection->getMethod('supportsRequest');
+            $source = file_get_contents($method->getFileName());
+            $startLine = $method->getStartLine();
+            $endLine = $method->getEndLine();
+            
+            $lines = explode("\n", $source);
+            $methodLines = array_slice($lines, $startLine - 1, $endLine - $startLine + 1);
+            $methodCode = implode("\n", $methodLines);
+
+            // Check if it handles LaunchRequest
+            if (str_contains($methodCode, 'LaunchRequest')) {
+                $this->intents['LaunchRequest'] = [
+                    'name' => 'LaunchRequest',
+                    'samples' => [],
+                    'slots' => [],
+                    'handler' => $handlerClass,
+                ];
+            }
+        }
 
         // Check supportsRequest method to find intent patterns
         if ($reflection->hasMethod('supportsRequest')) {
@@ -120,7 +152,7 @@ class InteractionModelGenerator
             $methodCode = implode("\n", $methodLines);
 
             // Extract intent names from supportsRequest method
-            $this->extractIntentsFromCode($methodCode, get_class($handler));
+            $this->extractIntentsFromCode($methodCode, $handlerClass);
         }
 
         // Check handleRequest method for slot usage

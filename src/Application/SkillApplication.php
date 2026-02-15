@@ -10,6 +10,8 @@ use Rboschin\AmazonAlexa\RequestHandler\RequestHandlerRegistry;
 use Rboschin\AmazonAlexa\Response\OutputSpeech;
 use Rboschin\AmazonAlexa\Response\Response;
 use Rboschin\AmazonAlexa\Validation\RequestValidator;
+use Rboschin\AmazonAlexa\Config\LoggerConfig;
+use Rboschin\AmazonAlexa\Services\PerformanceService;
 use Psr\Http\Message\ServerRequestInterface;
 
 /**
@@ -83,13 +85,24 @@ class SkillApplication
         $requestBody = (string) $request->getBody();
         $headers = $request->getHeaders();
         
+        LoggerConfig::info("Processing PSR-7 request", [
+            'content_length' => strlen($requestBody),
+            'headers_count' => count($headers)
+        ]);
+        
+        PerformanceService::startTimer('psr_request_processing');
+        
         // Convert PSR-7 headers to simple array format
         $simpleHeaders = [];
         foreach ($headers as $name => $values) {
             $simpleHeaders['HTTP_' . strtoupper(str_replace('-', '_', $name))] = $values[0] ?? '';
         }
         
-        return $this->handleRaw($requestBody, $simpleHeaders);
+        $response = $this->handleRaw($requestBody, $simpleHeaders);
+        
+        PerformanceService::endTimer('psr_request_processing');
+        
+        return $response;
     }
 
     /**
@@ -100,7 +113,18 @@ class SkillApplication
         $requestBody = file_get_contents('php://input');
         $headers = self::getHeadersFromGlobals();
         
-        return $this->handleRaw($requestBody, $headers);
+        LoggerConfig::info("Processing request from globals", [
+            'content_length' => strlen($requestBody),
+            'headers_count' => count($headers)
+        ]);
+        
+        PerformanceService::startTimer('request_processing');
+        
+        $response = $this->handleRaw($requestBody, $headers);
+        
+        PerformanceService::endTimer('request_processing');
+        
+        return $response;
     }
 
     /**
@@ -108,10 +132,45 @@ class SkillApplication
      */
     private function handleRequest(Request $request): Response
     {
+        $requestType = $request->getRequestType();
+        $intentName = $request->getIntentName() ?? 'unknown';
+        $userId = $request->getUserId() ?? 'unknown';
+        
+        LoggerConfig::info("Processing request", [
+            'request_type' => $requestType,
+            'intent' => $intentName,
+            'user_id' => $userId
+        ]);
+        
+        PerformanceService::startTimer('handler_selection');
+        
         try {
             $handler = $this->requestHandlerRegistry->getSupportingHandler($request);
+            
+            PerformanceService::endTimer('handler_selection', [
+                'handler_found' => true,
+                'handler_class' => get_class($handler)
+            ]);
+            
+            LoggerConfig::debug("Handler selected", [
+                'handler' => get_class($handler),
+                'intent' => $intentName
+            ]);
+            
             return $handler->handleRequest($request);
+            
         } catch (MissingRequestHandlerException $e) {
+            PerformanceService::endTimer('handler_selection', [
+                'handler_found' => false,
+                'error' => $e->getMessage()
+            ]);
+            
+            LoggerConfig::warning("No handler found for request", [
+                'request_type' => $requestType,
+                'intent' => $intentName,
+                'error' => $e->getMessage()
+            ]);
+            
             // Return a generic error response when no handler is found
             return $this->createErrorResponse('Sorry, I cannot handle this request right now.');
         }
@@ -122,8 +181,14 @@ class SkillApplication
      */
     private function handleError(\Exception $e): Response
     {
-        // Log error in real implementation
-        // error_log("SkillApplication error: " . $e->getMessage());
+        LoggerConfig::error("Application error occurred", [
+            'error' => $e->getMessage(),
+            'file' => $e->getFile(),
+            'line' => $e->getLine(),
+            'trace' => $e->getTraceAsString()
+        ]);
+        
+        PerformanceService::incrementCounter('application_errors');
         
         // Return user-friendly error response
         return $this->createErrorResponse('Sorry, something went wrong. Please try again later.');

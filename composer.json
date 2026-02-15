@@ -34,7 +34,8 @@
   "prefer-stable": true,
   "require": {
     "php": ">=8.2",
-    "guzzlehttp/guzzle": "^7.0"
+    "guzzlehttp/guzzle": "^7.0",
+    "monolog/monolog": "^2.0|^3.0"
   },
   "suggest": {
     "psr/http-client": "For using PSR-18 HTTP clients with RequestValidator",

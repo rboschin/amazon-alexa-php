@@ -264,12 +264,15 @@ class AlexaCli
             return;
         }
 
-        // Include autoloader
+        // Include framework autoloader first
         if (file_exists(__DIR__ . '/../vendor/autoload.php')) {
             require_once __DIR__ . '/../vendor/autoload.php';
         }
 
+        // Include required files directly if autoloader fails
+        require_once __DIR__ . '/../src/RequestHandler/AbstractRequestHandler.php';
         require_once __DIR__ . '/../src/Generator/InteractionModelGenerator.php';
+        require_once __DIR__ . '/../src/Generator/UtteranceExtractor.php';
 
         $generator = new \Rboschin\AmazonAlexa\Generator\InteractionModelGenerator(
             $skillName,
