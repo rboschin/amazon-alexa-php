@@ -5,7 +5,12 @@ declare(strict_types=1);
 namespace Rboschin\AmazonAlexa\TestSupport;
 
 use Rboschin\AmazonAlexa\Intent\Intent;
+use Rboschin\AmazonAlexa\Intent\Slot;
+use Rboschin\AmazonAlexa\Request\Context;
 use Rboschin\AmazonAlexa\Request\Request;
+use Rboschin\AmazonAlexa\Request\Session;
+use Rboschin\AmazonAlexa\Request\Viewport;
+use Rboschin\AmazonAlexa\Request\AlexaPresentationAPL;
 use Rboschin\AmazonAlexa\Request\Request\Standard\IntentRequest;
 use Rboschin\AmazonAlexa\Request\Request\Standard\LaunchRequest;
 use Rboschin\AmazonAlexa\Request\Request\Standard\SessionEndedRequest;
@@ -28,7 +33,7 @@ class IntentRequestFactory
         
         // Add slots
         foreach ($slots as $name => $value) {
-            $slot = new \Rboschin\AmazonAlexaIntent\Slot();
+            $slot = new Slot();
             $slot->name = $name;
             $slot->value = $value;
             $intent->slots[] = $slot;
@@ -43,6 +48,8 @@ class IntentRequestFactory
         
         return new Request(
             version: '1.0',
+            session: new Session(attributes: []),
+            context: new Context(),
             request: $intentRequest,
             amazonRequestBody: json_encode(['request' => ['intent' => ['name' => $intentName]]]),
             signatureCertChainUrl: 'https://s3.amazonaws.com/echo.api/test',
@@ -61,7 +68,7 @@ class IntentRequestFactory
         
         // Add slots
         foreach ($slots as $name => $value) {
-            $slot = new \Rboschin\AmazonAlexaIntent\Slot();
+            $slot = new Slot();
             $slot->name = $name;
             $slot->value = $value;
             $slot->confirmationStatus = 'CONFIRMED';
@@ -77,6 +84,8 @@ class IntentRequestFactory
         
         return new Request(
             version: '1.0',
+            session: new Session(attributes: []),
+            context: new Context(),
             request: $intentRequest,
             amazonRequestBody: json_encode(['request' => ['intent' => ['name' => $intentName]]]),
             signatureCertChainUrl: 'https://s3.amazonaws.com/echo.api/test',
@@ -97,6 +106,8 @@ class IntentRequestFactory
         
         return new Request(
             version: '1.0',
+            session: new Session(attributes: []),
+            context: new Context(),
             request: $launchRequest,
             amazonRequestBody: json_encode(['request' => ['type' => 'LaunchRequest']]),
             signatureCertChainUrl: 'https://s3.amazonaws.com/echo.api/test',
@@ -118,6 +129,8 @@ class IntentRequestFactory
         
         return new Request(
             version: '1.0',
+            session: new Session(attributes: []),
+            context: new Context(),
             request: $sessionEndedRequest,
             amazonRequestBody: json_encode(['request' => ['type' => 'SessionEndedRequest']]),
             signatureCertChainUrl: 'https://s3.amazonaws.com/echo.api/test',
@@ -135,7 +148,7 @@ class IntentRequestFactory
         
         // Add slots
         foreach ($slots as $name => $value) {
-            $slot = new \Rboschin\AmazonAlexaIntent\Slot();
+            $slot = new Slot();
             $slot->name = $name;
             $slot->value = $value;
             $intent->slots[] = $slot;
@@ -151,6 +164,8 @@ class IntentRequestFactory
         
         return new Request(
             version: '1.0',
+            session: new Session(attributes: []),
+            context: new Context(),
             request: $intentRequest,
             amazonRequestBody: json_encode(['request' => ['intent' => ['name' => $intentName]]]),
             signatureCertChainUrl: 'https://s3.amazonaws.com/echo.api/test',
@@ -165,7 +180,8 @@ class IntentRequestFactory
     {
         // Create a new request with modified session
         $newRequest = clone $request;
-        $newRequest->session->attributes = array_merge($request->session->attributes ?? [], $attributes);
+        $newRequest->session = $newRequest->session ?? new Session(attributes: []);
+        $newRequest->session->attributes = array_merge($newRequest->session->attributes ?? [], $attributes);
         
         return $newRequest;
     }
@@ -187,6 +203,8 @@ class IntentRequestFactory
         
         return new Request(
             version: '1.0',
+            session: new Session(attributes: []),
+            context: new Context(),
             request: $intentRequest,
             amazonRequestBody: json_encode(['request' => ['intent' => ['name' => 'TestIntent']]]),
             signatureCertChainUrl: 'invalid-url', // Invalid cert URL
@@ -220,18 +238,19 @@ class IntentRequestFactory
         
         // Add APL context to the request
         if (!empty($aplContext)) {
-            $request->context->viewport = new \Rboschin\AmazonAlexaRequest\Context();
-            $request->context->viewport->shape = 'RECTANGLE';
-            $request->context->viewport->dpi = 160;
-            $request->context->viewport->pixelWidth = 1024;
-            $request->context->viewport->pixelHeight = 600;
-            
-            // Add APL interface if available
-            if (class_exists(\Rboschin\AmazonAlexaRequest\AlexaPresentationAPL::class)) {
-                $request->context->alexaPresentationAPL = new \Rboschin\AmazonAlexaRequest\AlexaPresentationAPL();
-                $request->context->alexaPresentationAPL->runtime = new \Rboschin\AmazonAlexaRequest\AlexaPresentationAPL\Runtime();
-                $request->context->alexaPresentationAPL->runtime->maxVersion = '1.8';
-            }
+            $request->context = $request->context ?? new Context();
+
+            $request->context->viewport = new Viewport(
+                shape: \Rboschin\AmazonAlexa\Request\ViewportShape::RECTANGLE,
+                pixelWidth: 1024,
+                pixelHeight: 600,
+                dpi: 160,
+            );
+
+            $request->context->apl = new AlexaPresentationAPL(
+                token: $aplContext['token'] ?? null,
+                version: $aplContext['version'] ?? '1.8',
+            );
         }
         
         return $request;
